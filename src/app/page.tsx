@@ -22,7 +22,7 @@ export default function Home() {
       <section id="hero" className="w-full py-20 md:py-32 bg-card">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground mb-4">
-            Digital Craftsman & Code Artisan
+            Forging Digital Quality, From Code to Customer
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             Greetings adventurer! I am an experienced manual and automated quality assurance engineer with diverse experience across a wide variety of products and brands. After a twenty year career in hospitality and restaurant management, in 2021 I took a data analytics bootcamp at the University of Denver. Using that as a pivot, I started my career in QA working for Top Notch QA based in Colorado. Since then I have had the pleasure of working on projects for companies like Nike, Vail Resorts, Chipotle, and many others. I am adaptable, creative, and passionate with a love for a good bug hunt.
