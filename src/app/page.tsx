@@ -12,7 +12,7 @@ export default function Home() {
 
   const skills = [
     { name: 'Manual', icon: <Hand className="w-8 h-8 text-primary" />, description: 'Meticulous, user-centric testing to ensure flawless user experiences.' },
-    { name: 'Automation', icon: <Bot className="w-8 h-8 text-primary" />, description: 'Developing robust test scripts with Jest, Cypress, and Playwright.' },
+    { name: 'Automation', icon: <Bot className="w-8 h-8 text-primary" />, description: 'Specializing in web and native app automation with tools like WebdriverIO and Appium.' },
     { name: 'Design', icon: <PenTool className="w-8 h-8 text-primary" />, description: 'A keen eye for UI/UX, ensuring intuitive and beautiful interfaces.' },
     { name: 'Accessibility', icon: <Accessibility className="w-8 h-8 text-primary" />, description: 'Ensuring applications are usable by people of all abilities.' },
   ];
