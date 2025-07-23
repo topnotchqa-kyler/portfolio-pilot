@@ -7,7 +7,6 @@ import * as z from 'zod';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { 
@@ -52,7 +51,7 @@ export default function CheckoutPage() {
     },
   });
 
-  const onSubmit = () => {
+  const onSubmit = (values: CheckoutFormValues) => {
     setIsAlertOpen(true);
   };
 
