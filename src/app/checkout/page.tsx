@@ -1,10 +1,30 @@
+'use client';
+
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { 
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 export default function CheckoutPage() {
+  const [isAlertOpen, setIsAlertOpen] = useState(false);
+
+  const handlePlaceOrder = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsAlertOpen(true);
+  };
+
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="text-center mb-12">
@@ -98,7 +118,22 @@ export default function CheckoutPage() {
                 <p>Total</p>
                 <p>$113.24</p>
               </div>
-              <Button className="w-full mt-4" size="lg">Place Order</Button>
+              <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
+                <AlertDialogTrigger asChild>
+                  <Button className="w-full mt-4" size="lg" onClick={handlePlaceOrder}>Place Order</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Order Confirmation</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This is a demonstration store. No order has been placed and your card has not been charged. Thank you for trying out the checkout flow!
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogAction>OK</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </CardContent>
           </Card>
         </div>
