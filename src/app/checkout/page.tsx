@@ -57,16 +57,16 @@ export default function CheckoutPage() {
               <form className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="card-number">Card Number</Label>
-                  <Input id="card-number" placeholder="**** **** **** 1234" disabled />
+                  <Input id="card-number" placeholder="**** **** **** 1234" />
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="expiry-date">Expiry Date</Label>
-                    <Input id="expiry-date" placeholder="MM / YY" disabled />
+                    <Input id="expiry-date" placeholder="MM / YY" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="cvc">CVC</Label>
-                    <Input id="cvc" placeholder="123" disabled />
+                    <Input id="cvc" placeholder="123" />
                   </div>
                 </div>
               </form>
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
                 <p>Total</p>
                 <p>$113.24</p>
               </div>
-              <Button className="w-full mt-4" size="lg" disabled>Place Order</Button>
+              <Button className="w-full mt-4" size="lg">Place Order</Button>
             </CardContent>
           </Card>
         </div>
