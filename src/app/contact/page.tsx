@@ -21,7 +21,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-primary" />
                 <div>
                     <h3 className="font-semibold">Email</h3>
-                    <a href="mailto:contact@portfoliopilot.com" className="text-muted-foreground hover:text-primary">contact@portfoliopilot.com</a>
+                    <a href="mailto:contact@kylerstestingplayground.com" className="text-muted-foreground hover:text-primary">contact@kylerstestingplayground.com</a>
                 </div>
             </div>
             <div className="flex items-center gap-4">

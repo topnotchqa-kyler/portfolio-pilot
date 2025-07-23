@@ -23,7 +23,7 @@ export default async function Header() {
           <div className="p-2 bg-primary text-primary-foreground rounded-md">
             <Pilcrow />
           </div>
-          <span>Portfolio Pilot</span>
+          <span>Kyler's Testing Playground</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map(link => (
@@ -55,7 +55,7 @@ export default async function Header() {
               <nav className="grid gap-6 text-lg font-medium mt-8">
                 <Link href="/" className="flex items-center gap-2 font-bold font-headline text-lg mb-4">
                   <Pilcrow className="h-6 w-6" />
-                  <span>Portfolio Pilot</span>
+                  <span>Kyler's Testing Playground</span>
                 </Link>
                 {navLinks.map(link => (
                   <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground">

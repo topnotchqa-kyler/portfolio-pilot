@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 
-const AUTH_COOKIE_NAME = 'portfolio-pilot-auth';
+const AUTH_COOKIE_NAME = 'kylers-testing-playground-auth';
 
 export async function checkAuth() {
   const cookieStore = cookies();

@@ -5,8 +5,8 @@ import Footer from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'Portfolio Pilot',
-  description: 'Welcome to my professional portfolio.',
+  title: "Kyler's Testing Playground",
+  description: "Welcome to my testing playground.",
 };
 
 export default function RootLayout({
