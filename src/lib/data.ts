@@ -15,7 +15,7 @@ export const projectsData: Project[] = [
     title: 'Test Automation',
     description: 'An AI-powered tool to analyze and improve test suites, ensuring code quality and robustness. Suggests new tests and enhances existing ones.',
     techStack: ['Next.js', 'TypeScript', 'GenAI', 'Jest'],
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://webdriver.io/img/webdriverio.png',
     liveUrl: '/test-improver',
     githubUrl: '#',
   },
