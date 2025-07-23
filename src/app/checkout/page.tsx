@@ -51,6 +51,20 @@ export default function CheckoutPage() {
     },
   });
 
+  const fillFormForTesting = () => {
+    form.reset({
+      firstName: 'Jane',
+      lastName: 'Doe',
+      address: '456 Test Ave',
+      city: 'Debug City',
+      state: 'TS',
+      zip: '54321',
+      cardNumber: '4242 4242 4242 4242',
+      expiryDate: '12 / 26',
+      cvc: '321',
+    });
+  };
+
   const onSubmit = (values: CheckoutFormValues) => {
     setIsAlertOpen(true);
   };
@@ -232,7 +246,10 @@ export default function CheckoutPage() {
                   <p>Total</p>
                   <p>$113.24</p>
                 </div>
-                <Button type="submit" className="w-full mt-4" size="lg">Place Order</Button>
+                <div className="mt-4 space-y-2">
+                  <Button type="submit" className="w-full" size="lg">Place Order</Button>
+                  <Button type="button" variant="outline" className="w-full" onClick={fillFormForTesting}>Fill Form (Debug)</Button>
+                </div>
                 <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
                   <AlertDialogContent>
                     <AlertDialogHeader>
