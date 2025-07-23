@@ -25,7 +25,7 @@ export default function Home() {
             Digital Craftsman & Code Artisan
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            I build intuitive, scalable, and high-performance web applications. Welcome to my personal corner of the internet where I showcase my work and share my thoughts.
+            Greetings adventurer! I am an experienced manual and automated quality assurance engineer with diverse experience across a wide variety of products and brands. After a twenty year career in hospitality and restaurant management, in 2021 I took a data analytics bootcamp at the University of Denver. Using that as a pivot, I started my career in QA working for Top Notch QA based in Colorado. Since then I have had the pleasure of working on projects for companies like Nike, Vail Resorts, Chipotle, and many others. I am adaptable, creative, and passionate with a love for a good bug hunt.
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild size="lg">
