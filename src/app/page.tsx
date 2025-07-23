@@ -22,7 +22,7 @@ export default function Home() {
       <section id="hero" className="w-full py-20 md:py-32 bg-card">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground mb-4">
-            Digital Quality -- Assured
+            Digital Quality ... Assured
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
             As an experienced manual and automated quality assurance engineer, I bring a unique background from a twenty-year career in hospitality to the world of tech. I am adaptable, creative, and passionate with a love for a good bug hunt.
