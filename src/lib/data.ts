@@ -7,6 +7,7 @@ export type Project = {
   imageUrl: string;
   liveUrl?: string;
   githubUrl?: string;
+  aiHint?: string;
 };
 
 export const projectsData: Project[] = [
@@ -18,6 +19,7 @@ export const projectsData: Project[] = [
     imageUrl: 'https://webdriver.io/img/webdriverio.png',
     liveUrl: '/test-improver',
     githubUrl: '#',
+    aiHint: 'testing framework logo'
   },
   {
     id: 1,
@@ -27,6 +29,7 @@ export const projectsData: Project[] = [
     imageUrl: 'https://placehold.co/600x400.png',
     liveUrl: '/store',
     githubUrl: '#',
+    aiHint: 'modern storefront'
   },
   {
     id: 3,
@@ -36,6 +39,7 @@ export const projectsData: Project[] = [
     imageUrl: 'https://placehold.co/600x400.png',
     liveUrl: '/blog',
     githubUrl: '#',
+    aiHint: 'minimalist writing desk'
   },
   {
     id: 4,
@@ -45,6 +49,7 @@ export const projectsData: Project[] = [
     imageUrl: 'https://placehold.co/600x400.png',
     liveUrl: '/login',
     githubUrl: '#',
+    aiHint: 'secure login screen'
   },
 ];
 

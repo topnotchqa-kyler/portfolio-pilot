@@ -66,7 +66,7 @@ export default function Home() {
             {featuredProjects.map((project) => (
               <Card key={project.id} className="overflow-hidden group">
                 <div className="relative w-full h-64 bg-gray-100 dark:bg-gray-800">
-                  <Image src={project.imageUrl} alt={project.title} layout="fill" className="object-contain transition-transform duration-300 group-hover:scale-105 p-4" data-ai-hint="abstract technology" />
+                  <Image src={project.imageUrl} alt={project.title} fill className="object-contain transition-transform duration-300 group-hover:scale-105 p-4" data-ai-hint="abstract technology" />
                 </div>
                 <CardHeader>
                   <CardTitle className="font-headline">{project.title}</CardTitle>
