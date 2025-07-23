@@ -25,7 +25,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             src={product.imageUrl}
             alt={product.name}
             fill
-            className="object-contain p-4"
+            className="object-cover p-4"
             data-ai-hint={product.aiHint}
           />
         </div>

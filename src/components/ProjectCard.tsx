@@ -41,7 +41,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             src={imageUrl} 
             alt={project.title} 
             fill 
-            className="object-contain p-4" 
+            className={`${project.title === 'Test Automation' ? 'object-contain' : 'object-cover'} p-4`} 
             data-ai-hint={project.aiHint} 
           />
         )}
