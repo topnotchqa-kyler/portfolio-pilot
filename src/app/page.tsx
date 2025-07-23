@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowRight, Code, PenTool, Database, Cloud, TestTubeDiagonal } from 'lucide-react';
+import { ArrowRight, Bot, PenTool, Accessibility, Hand } from 'lucide-react';
 import { projectsData, blogPostsData } from '@/lib/data';
 
 export default function Home() {
@@ -11,10 +11,10 @@ export default function Home() {
   const recentPosts = blogPostsData.slice(0, 2);
 
   const skills = [
-    { name: 'Frontend', icon: <Code className="w-8 h-8 text-primary" />, description: 'React, Next.js, TypeScript, TailwindCSS' },
-    { name: 'Backend', icon: <Database className="w-8 h-8 text-primary" />, description: 'Node.js, Python, Firebase, SQL/NoSQL' },
-    { name: 'DevOps', icon: <Cloud className="w-8 h-8 text-primary" />, description: 'Docker, CI/CD, Google Cloud' },
-    { name: 'Testing', icon: <TestTubeDiagonal className="w-8 h-8 text-primary" />, description: 'Jest, Cypress, Playwright' },
+    { name: 'Manual', icon: <Hand className="w-8 h-8 text-primary" />, description: 'Meticulous, user-centric testing to ensure flawless user experiences.' },
+    { name: 'Automation', icon: <Bot className="w-8 h-8 text-primary" />, description: 'Developing robust test scripts with Jest, Cypress, and Playwright.' },
+    { name: 'Design', icon: <PenTool className="w-8 h-8 text-primary" />, description: 'A keen eye for UI/UX, ensuring intuitive and beautiful interfaces.' },
+    { name: 'Accessibility', icon: <Accessibility className="w-8 h-8 text-primary" />, description: 'Ensuring applications are usable by people of all abilities.' },
   ];
 
   return (
