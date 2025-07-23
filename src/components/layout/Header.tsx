@@ -5,6 +5,7 @@ import { Menu, Pilcrow, User } from 'lucide-react';
 import { checkAuth } from '@/lib/auth';
 
 const navLinks = [
+  { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
   { href: '/blog', label: 'Blog' },
   { href: '/store', label: 'Store' },
