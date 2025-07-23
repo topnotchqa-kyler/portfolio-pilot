@@ -19,15 +19,6 @@ export const projectsData: Project[] = [
     githubUrl: '#',
   },
   {
-    id: 2,
-    title: 'AI Test Improver Tool',
-    description: 'A tool that leverages generative AI to analyze and suggest improvements for automated software tests, enhancing code quality.',
-    techStack: ['Next.js', 'GenAI', 'Shadcn/ui'],
-    imageUrl: 'https://placehold.co/600x400.png',
-    liveUrl: '/test-improver',
-    githubUrl: '#',
-  },
-  {
     id: 3,
     title: 'Personal Blog',
     description: 'A statically generated blog built with Next.js, featuring posts written in Markdown. Demonstrates content creation and static site generation.',
