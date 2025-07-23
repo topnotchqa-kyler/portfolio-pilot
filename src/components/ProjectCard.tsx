@@ -15,7 +15,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
       <div className="relative h-56 w-full bg-gray-100 dark:bg-gray-800">
-        <Image src={project.imageUrl} alt={project.title} fill objectFit="contain" className="p-4" data-ai-hint={project.aiHint} />
+        <Image src={project.imageUrl} alt={project.title} fill className="object-contain p-4" data-ai-hint={project.aiHint} />
       </div>
       <CardHeader>
         <CardTitle className="font-headline">{project.title}</CardTitle>
