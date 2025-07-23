@@ -14,8 +14,8 @@ interface ProjectCardProps {
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="relative h-56 w-full">
-        <Image src={project.imageUrl} alt={project.title} layout="fill" objectFit="cover" data-ai-hint="abstract technology" />
+      <div className="relative h-56 w-full bg-gray-100 dark:bg-gray-800">
+        <Image src={project.imageUrl} alt={project.title} layout="fill" objectFit="contain" className="p-4" data-ai-hint="abstract technology" />
       </div>
       <CardHeader>
         <CardTitle className="font-headline">{project.title}</CardTitle>

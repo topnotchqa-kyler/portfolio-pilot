@@ -65,7 +65,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredProjects.map((project) => (
               <Card key={project.id} className="overflow-hidden group">
-                <Image src={project.imageUrl} alt={project.title} width={600} height={400} className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="abstract technology" />
+                <div className="relative w-full h-64 bg-gray-100 dark:bg-gray-800">
+                  <Image src={project.imageUrl} alt={project.title} layout="fill" className="object-contain transition-transform duration-300 group-hover:scale-105 p-4" data-ai-hint="abstract technology" />
+                </div>
                 <CardHeader>
                   <CardTitle className="font-headline">{project.title}</CardTitle>
                   <CardDescription>{project.description.substring(0, 100)}...</CardDescription>
