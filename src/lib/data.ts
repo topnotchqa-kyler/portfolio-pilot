@@ -1,3 +1,4 @@
+
 export type Project = {
   id: number;
   title: string;
@@ -16,6 +17,14 @@ export const projectsData: Project[] = [
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GenAI'],
     imageUrl: 'https://placehold.co/600x400.png',
     liveUrl: '/store',
+    githubUrl: '#',
+  },
+  {
+    id: 2,
+    title: 'Test Automation',
+    description: 'An AI-powered tool to analyze and improve test suites, ensuring code quality and robustness. Suggests new tests and enhances existing ones.',
+    techStack: ['Next.js', 'TypeScript', 'GenAI', 'Jest'],
+    imageUrl: 'https://placehold.co/600x400.png',
     githubUrl: '#',
   },
   {
