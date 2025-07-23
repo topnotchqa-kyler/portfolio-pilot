@@ -25,7 +25,7 @@ export default function Home() {
             Forging Digital Quality, From Code to Customer
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            As an experienced manual and automated quality assurance engineer, I bring a unique background from a twenty-year career in hospitality to the world of tech. I am adaptable, creative, and passionate with a love for a good bug hunt on projects for brands like Nike, Vail Resorts, and Chipotle.
+            As an experienced manual and automated quality assurance engineer, I bring a unique background from a twenty-year career in hospitality to the world of tech. I am adaptable, creative, and passionate with a love for a good bug hunt.
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild size="lg">
