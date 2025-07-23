@@ -20,13 +20,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   return (
     <div className="container mx-auto py-16 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        <div className="relative aspect-square rounded-lg overflow-hidden shadow-lg">
+        <div className="relative aspect-square rounded-lg overflow-hidden shadow-lg bg-muted">
           <Image
             src={product.imageUrl}
             alt={product.name}
             fill
-            className="object-cover"
-            data-ai-hint="futuristic gadget"
+            className="object-contain p-4"
+            data-ai-hint={product.aiHint}
           />
         </div>
         <div className="space-y-6">

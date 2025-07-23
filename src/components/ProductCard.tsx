@@ -16,8 +16,8 @@ export function ProductCard({ product }: ProductCardProps) {
             src={product.imageUrl}
             alt={product.name}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint="futuristic gadget"
+            className="object-contain transition-transform duration-300 group-hover:scale-105 p-4"
+            data-ai-hint={product.aiHint}
           />
         </div>
         <CardHeader>

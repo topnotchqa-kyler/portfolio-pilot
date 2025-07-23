@@ -106,6 +106,7 @@ export type Product = {
   description: string;
   price: number;
   imageUrl: string;
+  aiHint: string;
 };
 
 export const productsData: Product[] = [
@@ -115,6 +116,7 @@ export const productsData: Product[] = [
     description: 'A revolutionary widget that operates at the quantum level. Features include superposition and entanglement for unparalleled performance.',
     price: 99.99,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'glowing cube'
   },
   {
     id: 'prod_002',
@@ -122,6 +124,7 @@ export const productsData: Product[] = [
     description: 'Experience zero latency with our hyper-threaded computer mouse. Perfect for gaming and professional design work.',
     price: 75.50,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'gaming mouse'
   },
   {
     id: 'prod_003',
@@ -129,6 +132,7 @@ export const productsData: Product[] = [
     description: 'A mechanical keyboard with a direct neural interface (adapter sold separately). Typing has never been more intuitive.',
     price: 249.99,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'mechanical keyboard'
   },
   {
     id: 'prod_004',
@@ -136,6 +140,7 @@ export const productsData: Product[] = [
     description: 'This smart mug keeps your coffee at the perfect temperature and provides daily affirmations powered by a tiny AI.',
     price: 49.99,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'smart mug'
   },
   {
     id: 'prod_005',
@@ -143,6 +148,7 @@ export const productsData: Product[] = [
     description: 'A beautiful, maintenance-free holographic plant for your desk. Choose from over 100 species.',
     price: 39.99,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'holographic plant'
   },
   {
     id: 'prod_006',
@@ -150,5 +156,6 @@ export const productsData: Product[] = [
     description: 'Write upside down, underwater, or in zero gravity. This pen defies physics for the ultimate writing experience.',
     price: 29.99,
     imageUrl: 'https://placehold.co/400x400.png',
+    aiHint: 'floating pen'
   },
 ];
