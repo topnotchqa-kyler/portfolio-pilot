@@ -26,8 +26,6 @@ export const projectsData: Project[] = [
     description: 'A full-featured e-commerce platform with a modern UI, product management, and a mock checkout process. Built with Next.js and Tailwind CSS.',
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GenAI'],
     imageUrl: 'https://placehold.co/600x400.png',
-    liveUrl: '/store',
-    githubUrl: '#',
     aiHint: 'modern storefront'
   },
   {
@@ -36,8 +34,6 @@ export const projectsData: Project[] = [
     description: 'A statically generated blog built with Next.js, featuring posts written in Markdown. Demonstrates content creation and static site generation.',
     techStack: ['Next.js', 'React', 'Markdown'],
     imageUrl: 'https://placehold.co/600x400.png',
-    liveUrl: '/blog',
-    githubUrl: '#',
     aiHint: 'minimalist writing desk'
   },
   {
@@ -46,8 +42,6 @@ export const projectsData: Project[] = [
     description: 'A simple membership portal with signup, login, and a protected dashboard page. Implemented using server actions and cookies for auth simulation.',
     techStack: ['Next.js', 'Server Actions', 'Middleware'],
     imageUrl: 'https://placehold.co/600x400.png',
-    liveUrl: '/login',
-    githubUrl: '#',
     aiHint: 'secure login screen'
   },
 ];
