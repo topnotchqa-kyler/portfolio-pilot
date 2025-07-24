@@ -3,6 +3,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster"
+import { Chatbot } from '@/components/Chatbot';
 
 export const metadata: Metadata = {
   title: "Kyler's Testing Playground",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Chatbot />
         <Toaster />
       </body>
     </html>
