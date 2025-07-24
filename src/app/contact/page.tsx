@@ -21,21 +21,21 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-primary" />
                 <div>
                     <h3 className="font-semibold">Email</h3>
-                    <a href="mailto:contact@kylerstestingplayground.com" className="text-muted-foreground hover:text-primary">contact@kylerstestingplayground.com</a>
+                    <a href="mailto:kyler.chavez@gmail.com" className="text-muted-foreground hover:text-primary">kyler.chavez@gmail.com</a>
                 </div>
             </div>
             <div className="flex items-center gap-4">
                 <Phone className="w-6 h-6 text-primary" />
                 <div>
                     <h3 className="font-semibold">Phone</h3>
-                    <p className="text-muted-foreground">(123) 456-7890</p>
+                    <p className="text-muted-foreground">203-919-0099</p>
                 </div>
             </div>
             <div className="flex items-center gap-4">
                 <MapPin className="w-6 h-6 text-primary" />
                 <div>
                     <h3 className="font-semibold">Location</h3>
-                    <p className="text-muted-foreground">San Francisco, CA</p>
+                    <p className="text-muted-foreground">Mead, CO</p>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@ export default function ContactPage() {
             <CardDescription>I'll get back to you as soon as possible.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-4">
+            <form action="https://formspree.io/f/kyler.chavez@gmail.com" method="POST" className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Name</label>
