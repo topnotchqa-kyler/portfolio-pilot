@@ -1,6 +1,7 @@
 import { logout } from '@/app/authActions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import Image from 'next/image';
 
 export default function DashboardPage() {
   return (
@@ -11,6 +12,15 @@ export default function DashboardPage() {
           <CardDescription>This is a protected area for members only.</CardDescription>
         </CardHeader>
         <CardContent>
+          <div className="mb-6 flex justify-center">
+            <Image 
+              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmZyOHV3dG1kZmx0a2Y1d2V0dWM3ZHY0c3BmaXl6d3pjY2w0aDZqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Zt481isNVuQI1l6/giphy.gif"
+              alt="Party cat animation"
+              width={300}
+              height={300}
+              unoptimized
+            />
+          </div>
           <p className="mb-6">You have successfully logged in. Explore your member benefits (coming soon!).</p>
           <form action={logout}>
             <Button type="submit" variant="destructive">Log Out</Button>

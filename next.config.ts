@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
         hostname: 'webdriver.io',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.giphy.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
