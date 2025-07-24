@@ -43,7 +43,7 @@ export function LoginForm() {
   
   function onDebugLogin() {
     startTransition(async () => {
-      const result = await login({ email: 'test@example.com', password: 'password' });
+      const result = await login({ email: 'test@example.com', password: 'password123' });
       if (result?.error) {
         toast({
           title: 'Login Failed',
