@@ -35,22 +35,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </CardContent>
-      <CardFooter className="flex justify-start gap-2">
-        {project.liveUrl && (
-          <Button asChild>
-            <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="mr-2" /> Live Demo
-            </Link>
-          </Button>
-        )}
-        {project.githubUrl && (
-          <Button asChild variant="outline">
-            <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-              <Github className="mr-2" /> GitHub
-            </Link>
-          </Button>
-        )}
-      </CardFooter>
     </Card>
   );
 }
