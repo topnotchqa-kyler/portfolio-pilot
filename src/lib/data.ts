@@ -14,7 +14,7 @@ export const projectsData: Project[] = [
   {
     id: 2,
     title: 'Test Automation',
-    description: 'An AI-powered tool to analyze and improve test suites, ensuring code quality and robustness. Suggests new tests and enhances existing ones.',
+    description: 'A comprehensive test automation suite for the e-commerce platform, built with WebdriverIO. It covers critical user journeys, from browsing products to completing the checkout process.',
     techStack: ['Next.js', 'TypeScript', 'GenAI', 'Jest'],
     imageUrl: 'https://webdriver.io/img/webdriverio.png',
     liveUrl: '/test-improver',
