@@ -3,13 +3,13 @@ import Image from 'next/image';
 export default function AboutPage() {
   return (
     <div className="container mx-auto py-16 px-4">
-      <section id="story">
+      <section id="story" aria-labelledby="story-heading">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           <div className="md:col-span-1 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden shadow-2xl">
               <Image
                 src="https://placehold.co/600x600.png"
-                alt="A personal portrait"
+                alt="A portrait of Kyler Chavez."
                 fill
                 className="object-cover"
                 data-ai-hint="personal portrait"
@@ -17,7 +17,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="md:col-span-2 space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold font-headline">My Story</h1>
+            <h1 id="story-heading" className="text-4xl md:text-5xl font-bold font-headline">My Story</h1>
             <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p>
                     I was born in Karachi, Pakistan to a Mexican father and an American mother. We moved to Hong Kong when I was 3 and then, finally, to Connecticut when I was 7. After attending elementary and middle school there, I spent my high school years at Northfield Mount Hermon - a college preparatory boarding school in Western Massachusetts.

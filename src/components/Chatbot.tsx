@@ -68,7 +68,7 @@ export function Chatbot() {
               Chat with Kyra
             </SheetTitle>
           </SheetHeader>
-          <ScrollArea className="flex-1 p-6" ref={scrollAreaRef}>
+          <ScrollArea className="flex-1 p-6" ref={scrollAreaRef} aria-live="polite">
             <div className="space-y-6">
               {messages.map((msg, index) => (
                 <div key={index} className={cn("flex items-start gap-3", msg.role === 'user' ? 'justify-end' : 'justify-start')}>
@@ -88,7 +88,7 @@ export function Chatbot() {
                 </div>
               ))}
               {isLoading && (
-                 <div className="flex items-start gap-3 justify-start">
+                 <div className="flex items-start gap-3 justify-start" aria-label="Kyra is typing">
                     <Avatar className="w-8 h-8">
                         <AvatarFallback><Bot size={20} /></AvatarFallback>
                     </Avatar>
@@ -101,14 +101,16 @@ export function Chatbot() {
           </ScrollArea>
           <SheetFooter className="p-6 pt-2 bg-background">
             <form onSubmit={handleSendMessage} className="flex w-full items-center gap-2">
+              <label htmlFor="chat-input" className="sr-only">Ask a question</label>
               <Input
+                id="chat-input"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask a question..."
                 autoComplete="off"
                 disabled={isLoading}
               />
-              <Button type="submit" size="icon" disabled={isLoading}>
+              <Button type="submit" size="icon" disabled={isLoading} aria-label="Send Message">
                 <Send className="w-4 h-4" />
               </Button>
             </form>
