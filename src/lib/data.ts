@@ -17,8 +17,7 @@ export const projectsData: Project[] = [
     description: 'A comprehensive test automation suite using WebdriverIO that covers the whole of the website - e-commerce, blog, form, and login authentication.',
     techStack: ['WebdriverIO', 'TypeScript', 'Node.js'],
     imageUrl: 'https://webdriver.io/img/webdriverio.png',
-    liveUrl: '/test-improver',
-    githubUrl: '#',
+    githubUrl: 'https://github.com/kylerchavez/webdriverio-testing-framework',
     aiHint: 'testing framework logo'
   },
   {

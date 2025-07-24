@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github, ExternalLink } from 'lucide-react';
+import { Github } from 'lucide-react';
 import type { Project } from '@/lib/data';
 
 interface ProjectCardProps {
@@ -35,6 +35,26 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </CardContent>
+      {(project.liveUrl || project.githubUrl) && (
+        <CardFooter className="pt-4">
+          <div className="flex gap-4">
+            {project.githubUrl && (
+              <Button asChild variant="outline">
+                <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <Github /> GitHub
+                </Link>
+              </Button>
+            )}
+            {project.liveUrl && (
+              <Button asChild>
+                <Link href={project.liveUrl}>
+                  Live Demo
+                </Link>
+              </Button>
+            )}
+          </div>
+        </CardFooter>
+      )}
     </Card>
   );
 }
