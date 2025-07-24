@@ -46,7 +46,7 @@ export default function ContactPage() {
             <CardDescription>I'll get back to you as soon as possible.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action="https://formspree.io/f/kyler.chavez@gmail.com" method="POST" className="space-y-4">
+            <form action="https://formspree.io/f/xwpqlzgw" method="POST" className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-medium">Name</label>
