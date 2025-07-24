@@ -4,7 +4,7 @@ const AUTH_COOKIE_NAME = 'kylers-testing-playground-auth';
 
 export async function checkAuth() {
   const cookieStore = cookies();
-  return cookieStore.has(AUTH_COOKIE_NAME);
+  return !!cookieStore.get(AUTH_COOKIE_NAME);
 }
 
 export async function setAuthCookie() {
