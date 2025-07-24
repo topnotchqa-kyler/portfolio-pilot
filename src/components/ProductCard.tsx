@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Product } from '@/lib/data';
-import { Skeleton } from './ui/skeleton';
 
 interface ProductCardProps {
   product: Product;
