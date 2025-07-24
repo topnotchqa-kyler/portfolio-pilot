@@ -15,7 +15,7 @@ export default function DashboardPage() {
         <CardContent>
           <div className="mb-6 flex justify-center">
             <Image 
-              src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmZyOHV3dG1kZmx0a2Y1d2V0dWM3ZHY0c3BmaXl6d3pjY2w0aDZqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o6Zt481isNVuQI1l6/giphy.gif"
+              src="https://media.giphy.com/media/6fScAIaT0d4L6/giphy.gif"
               alt="Party cat animation"
               width={300}
               height={300}
