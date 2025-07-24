@@ -20,30 +20,6 @@ export const projectsData: Project[] = [
     githubUrl: 'https://github.com/kchavez05/portfolio-site-testing.git',
     aiHint: 'testing framework logo'
   },
-  {
-    id: 1,
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with a modern UI, product management, and a mock checkout process. Built with Next.js and Tailwind CSS.',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'GenAI'],
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'modern storefront'
-  },
-  {
-    id: 3,
-    title: 'Personal Blog',
-    description: 'A statically generated blog built with Next.js, featuring posts written in Markdown. Demonstrates content creation and static site generation.',
-    techStack: ['Next.js', 'React', 'Markdown'],
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'minimalist writing desk'
-  },
-  {
-    id: 4,
-    title: 'Membership Portal',
-    description: 'A simple membership portal with signup, login, and a protected dashboard page. Implemented using server actions and cookies for auth simulation.',
-    techStack: ['Next.js', 'Server Actions', 'Middleware'],
-    imageUrl: 'https://placehold.co/600x400.png',
-    aiHint: 'secure login screen'
-  },
 ];
 
 export type Product = {
