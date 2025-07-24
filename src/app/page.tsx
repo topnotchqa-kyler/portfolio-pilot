@@ -35,6 +35,11 @@ export default function Home() {
               <Link href="/contact">Get In Touch</Link>
             </Button>
           </div>
+          <div className="mt-6 text-center">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto italic">
+              This site serves as both a professional portfolio and a functional sandbox for demonstrating test automation suites.
+            </p>
+          </div>
         </div>
       </section>
 
