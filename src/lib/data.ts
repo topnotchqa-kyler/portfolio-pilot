@@ -53,58 +53,6 @@ export const projectsData: Project[] = [
   },
 ];
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  content: string;
-};
-
-export const blogPostsData: BlogPost[] = [
-  {
-    slug: 'the-art-of-component-design',
-    title: 'The Art of Component Design in React',
-    excerpt: 'Discover the principles behind creating reusable, maintainable, and scalable React components.',
-    date: '2024-05-15',
-    content: `
-# The Art of Component Design in React
-
-Building complex applications requires a solid foundation. In React, this foundation is built upon components. Well-designed components are reusable, maintainable, and easy to understand. This post explores key principles for effective component design.
-
-## Single Responsibility Principle
-A component should ideally do one thing. If a component handles data fetching, state management, and rendering complex UI, it's time to break it down.
-
-## Separation of Concerns
-Separate container components (logic-heavy) from presentational components (UI-focused). This makes your UI components highly reusable.
-
-## Props and State
-Keep components as stateless as possible. Lift state up to the nearest common ancestor when multiple components need to share it. Use props to pass data and callbacks down.
-
-By following these principles, you can create a robust and scalable component architecture for your React applications.
-    `,
-  },
-  {
-    slug: 'getting-started-with-nextjs-14',
-    title: 'Getting Started with Next.js 14 App Router',
-    excerpt: 'A beginner\'s guide to the new App Router in Next.js, covering layouts, server components, and more.',
-    date: '2024-06-02',
-    content: `
-# Getting Started with Next.js 14 App Router
-
-Next.js 14 introduced the App Router, a new paradigm for building applications. It brings powerful features like Server Components, nested layouts, and improved data fetching.
-
-## Key Concepts
-
-- **Server Components:** These run on the server, reducing the amount of JavaScript sent to the client. This leads to faster initial page loads.
-- **Layouts:** Create UI that is shared between multiple pages. Layouts can be nested to create complex application shells.
-- **Route Handlers & Server Actions:** Build your API right inside your app directory or perform data mutations securely on the server without creating separate API endpoints.
-
-The App Router is a powerful evolution for Next.js, enabling developers to build faster, more efficient, and more interactive web applications.
-    `,
-  },
-];
-
 export type Product = {
   id: string;
   name: string;
@@ -164,3 +112,11 @@ export const productsData: Product[] = [
     aiHint: 'floating pen'
   },
 ];
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  content: string;
+};

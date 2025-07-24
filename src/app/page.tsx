@@ -1,14 +1,14 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight, Bot, PenTool, Accessibility, Hand } from 'lucide-react';
-import { projectsData, blogPostsData } from '@/lib/data';
+import { projectsData } from '@/lib/data';
+import { getSortedPostsData } from '@/lib/blog';
 
 export default function Home() {
   const featuredProjects = projectsData.slice(0, 2);
-  const recentPosts = blogPostsData.slice(0, 2);
+  const recentPosts = getSortedPostsData().slice(0, 2);
 
   const skills = [
     { name: 'Manual', icon: <Hand className="w-8 h-8 text-primary" />, description: 'Meticulous, user-centric testing using tools like TestRail and Zephyr to ensure flawless user experiences.' },
@@ -95,7 +95,7 @@ export default function Home() {
             {recentPosts.map((post) => (
               <Card key={post.slug} className="flex flex-col">
                 <CardHeader>
-                  <p className="text-sm text-muted-foreground">{post.date}</p>
+                  <p className="text-sm text-muted-foreground">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                   <CardTitle className="font-headline">{post.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
@@ -108,6 +108,11 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+           <div className="text-center mt-12">
+            <Button asChild>
+              <Link href="/blog">See All Posts</Link>
+            </Button>
           </div>
         </div>
       </section>
