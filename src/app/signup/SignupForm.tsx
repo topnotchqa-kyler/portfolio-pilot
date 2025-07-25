@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -44,7 +45,7 @@ export function SignupForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6" data-testid="signup-form">
         <FormField
           control={form.control}
           name="name"
@@ -52,7 +53,7 @@ export function SignupForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="Your Name" {...field} />
+                <Input placeholder="Your Name" {...field} data-testid="signup-name-input" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -65,7 +66,7 @@ export function SignupForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@example.com" {...field} />
+                <Input type="email" placeholder="you@example.com" {...field} data-testid="signup-email-input" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -78,19 +79,19 @@ export function SignupForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" placeholder="••••••••" {...field} />
+                <Input type="password" placeholder="••••••••" {...field} data-testid="signup-password-input" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full" disabled={isPending}>
+        <Button type="submit" className="w-full" disabled={isPending} data-testid="signup-submit-button">
           {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Sign Up
         </Button>
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-primary hover:underline">
+          <Link href="/login" className="font-semibold text-primary hover:underline" data-testid="signup-login-link">
             Log in
           </Link>
         </p>

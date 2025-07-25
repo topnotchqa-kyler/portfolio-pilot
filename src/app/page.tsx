@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -18,8 +19,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
-      <section id="hero" className="w-full py-20 md:py-32 bg-card">
+    <div className="flex flex-col items-center" data-testid="home-page">
+      <section id="hero" className="w-full py-20 md:py-32 bg-card" data-testid="hero-section">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground mb-4">
             Digital Quality ... Assured
@@ -29,10 +30,10 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild size="lg">
-              <Link href="/projects">View My Work</Link>
+              <Link href="/projects" data-testid="hero-view-work-button">View My Work</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/contact">Get In Touch</Link>
+              <Link href="/contact" data-testid="hero-get-in-touch-button">Get In Touch</Link>
             </Button>
           </div>
           <div className="mt-6 text-center">
@@ -43,12 +44,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="skills" className="w-full py-20 md:py-24">
+      <section id="skills" className="w-full py-20 md:py-24" data-testid="skills-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-12">My Skillset</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {skills.map((skill) => (
-              <Card key={skill.name} className="text-center hover:shadow-lg transition-shadow duration-300">
+              <Card key={skill.name} className="text-center hover:shadow-lg transition-shadow duration-300" data-testid={`skill-card-${skill.name.toLowerCase()}`}>
                 <CardHeader>
                   <div className="mx-auto bg-primary/10 rounded-full p-4 w-fit mb-4">
                     {skill.icon}
@@ -64,12 +65,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="featured-projects" className="w-full py-20 md:py-24 bg-card">
+      <section id="featured-projects" className="w-full py-20 md:py-24 bg-card" data-testid="featured-projects-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-12">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {featuredProjects.map((project) => (
-              <Card key={project.id} className="overflow-hidden group">
+              <Card key={project.id} className="overflow-hidden group" data-testid={`featured-project-${project.id}`}>
                 <div className="relative w-full h-64 bg-gray-100 dark:bg-gray-800">
                   <Image src={project.imageUrl} alt={project.title} fill className={`${project.title === 'Test Automation' ? 'object-contain' : 'object-cover'} transition-transform duration-300 group-hover:scale-105 p-4`} data-ai-hint="abstract technology" />
                 </div>
@@ -79,7 +80,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={`/projects`}>View Project <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                    <Link href={`/projects`} data-testid={`featured-project-link-${project.id}`}>View Project <ArrowRight className="w-4 h-4 ml-2" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -87,18 +88,18 @@ export default function Home() {
           </div>
           <div className="text-center mt-12">
             <Button asChild>
-              <Link href="/projects">See All Projects</Link>
+              <Link href="/projects" data-testid="see-all-projects-button">See All Projects</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section id="blog" className="w-full py-20 md:py-24">
+      <section id="blog" className="w-full py-20 md:py-24" data-testid="blog-section">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-12">From the Blog</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {recentPosts.map((post) => (
-              <Card key={post.slug} className="flex flex-col">
+              <Card key={post.slug} className="flex flex-col" data-testid={`recent-post-${post.slug}`}>
                 <CardHeader>
                   <p className="text-sm text-muted-foreground">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                   <CardTitle className="font-headline">{post.title}</CardTitle>
@@ -108,7 +109,7 @@ export default function Home() {
                 </CardContent>
                 <CardContent>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={`/blog/${post.slug}`}>Read More <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                    <Link href={`/blog/${post.slug}`} data-testid={`recent-post-link-${post.slug}`}>Read More <ArrowRight className="w-4 h-4 ml-2" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -116,7 +117,7 @@ export default function Home() {
           </div>
            <div className="text-center mt-12">
             <Button asChild>
-              <Link href="/blog">See All Posts</Link>
+              <Link href="/blog" data-testid="see-all-posts-button">See All Posts</Link>
             </Button>
           </div>
         </div>

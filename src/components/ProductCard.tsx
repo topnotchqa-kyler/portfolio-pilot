@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import Image from 'next/image';
@@ -12,8 +13,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href={`/store/${product.id}`} className="block group">
-      <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Link href={`/store/${product.id}`} className="block group" data-testid={`product-card-link-${product.id}`}>
+      <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`product-card-${product.id}`}>
         <div className="relative aspect-square w-full bg-muted overflow-hidden">
             <Image
               src={product.imageUrl}

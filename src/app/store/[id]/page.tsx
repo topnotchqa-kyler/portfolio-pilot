@@ -1,3 +1,4 @@
+
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { productsData } from '@/lib/data';
@@ -18,7 +19,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="container mx-auto py-16 px-4" data-testid={`product-detail-page-${product.id}`}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         <div className="relative aspect-square rounded-lg overflow-hidden shadow-lg bg-muted">
           <Image
@@ -27,21 +28,22 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             fill
             className="object-cover p-4"
             data-ai-hint={product.aiHint}
+            data-testid="product-image"
           />
         </div>
         <div className="space-y-6">
           <Badge>In Stock</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold font-headline">{product.name}</h1>
-          <p className="text-3xl font-semibold text-primary">${product.price.toFixed(2)}</p>
-          <p className="text-muted-foreground text-lg">{product.description}</p>
+          <h1 className="text-4xl md:text-5xl font-bold font-headline" data-testid="product-name">{product.name}</h1>
+          <p className="text-3xl font-semibold text-primary" data-testid="product-price">${product.price.toFixed(2)}</p>
+          <p className="text-muted-foreground text-lg" data-testid="product-description">{product.description}</p>
           <div className="flex items-center gap-4">
             <Button size="lg" asChild>
-                <Link href="/checkout">
+                <Link href="/checkout" data-testid="add-to-cart-button">
                     <ShoppingCart className="mr-2 h-5 w-5" /> Add to Cart
                 </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-                <Link href="/store">
+                <Link href="/store" data-testid="continue-shopping-button">
                     Continue Shopping
                 </Link>
             </Button>

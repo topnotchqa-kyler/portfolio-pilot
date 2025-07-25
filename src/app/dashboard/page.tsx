@@ -1,4 +1,5 @@
 
+
 import { logout } from '@/app/authActions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -6,10 +7,10 @@ import Image from 'next/image';
 
 export default function DashboardPage() {
   return (
-    <div className="container mx-auto flex items-center justify-center py-16 px-4 min-h-[calc(100vh-8rem)]">
+    <div className="container mx-auto flex items-center justify-center py-16 px-4 min-h-[calc(100vh-8rem)]" data-testid="dashboard-page">
       <Card className="w-full max-w-2xl text-center">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl">Welcome to your Dashboard</CardTitle>
+          <CardTitle className="font-headline text-3xl" data-testid="dashboard-heading">Welcome to your Dashboard</CardTitle>
           <CardDescription>This is a protected area for members only.</CardDescription>
         </CardHeader>
         <CardContent>
@@ -24,7 +25,7 @@ export default function DashboardPage() {
           </div>
           <p className="mb-6">You have successfully logged in. Explore your member benefits (coming soon!).</p>
           <form action={logout}>
-            <Button type="submit" variant="destructive">Log Out</Button>
+            <Button type="submit" variant="destructive" data-testid="logout-button">Log Out</Button>
           </form>
         </CardContent>
       </Card>

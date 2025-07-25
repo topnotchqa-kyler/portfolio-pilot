@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -56,7 +57,7 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="login-form">
         <div className="space-y-6">
           <FormField
             control={form.control}
@@ -65,7 +66,7 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="you@example.com" {...field} />
+                  <Input type="email" placeholder="you@example.com" {...field} data-testid="login-email-input" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -78,7 +79,7 @@ export function LoginForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="••••••••" {...field} />
+                  <Input type="password" placeholder="••••••••" {...field} data-testid="login-password-input" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -86,18 +87,18 @@ export function LoginForm() {
           />
         </div>
         <div className="space-y-2">
-            <Button type="submit" className="w-full" disabled={isPending}>
+            <Button type="submit" className="w-full" disabled={isPending} data-testid="login-submit-button">
               {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Log In
             </Button>
-             <Button type="button" variant="outline" className="w-full" onClick={onDebugLogin} disabled={isPending}>
+             <Button type="button" variant="outline" className="w-full" onClick={onDebugLogin} disabled={isPending} data-testid="login-debug-button">
                 {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 Debug Login
             </Button>
         </div>
         <p className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{' '}
-          <Link href="/signup" className="font-semibold text-primary hover:underline">
+          <Link href="/signup" className="font-semibold text-primary hover:underline" data-testid="login-signup-link">
             Sign up
           </Link>
         </p>

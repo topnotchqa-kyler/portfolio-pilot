@@ -1,4 +1,5 @@
 
+
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`project-card-${project.id}`}>
       <div className="relative h-56 w-full bg-muted overflow-hidden">
           <Image 
             src={project.imageUrl} 
@@ -40,14 +41,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <div className="flex gap-4">
             {project.githubUrl && (
               <Button asChild variant="outline">
-                <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer" data-testid={`project-github-link-${project.id}`}>
                   <Github /> GitHub
                 </Link>
               </Button>
             )}
             {project.liveUrl && (
               <Button asChild>
-                <Link href={project.liveUrl}>
+                <Link href={project.liveUrl} data-testid={`project-live-link-${project.id}`}>
                   Live Demo
                 </Link>
               </Button>

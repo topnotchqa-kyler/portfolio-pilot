@@ -1,8 +1,9 @@
+
 import Image from 'next/image';
 
 export default function AboutPage() {
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="container mx-auto py-16 px-4" data-testid="about-page">
       <section id="story" aria-labelledby="story-heading">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           <div className="md:col-span-1 flex justify-center">
@@ -13,12 +14,13 @@ export default function AboutPage() {
                 fill
                 className="object-cover"
                 data-ai-hint="personal portrait"
+                data-testid="about-portrait"
               />
             </div>
           </div>
           <div className="md:col-span-2 space-y-4">
-            <h1 id="story-heading" className="text-4xl md:text-5xl font-bold font-headline">My Story</h1>
-            <div className="prose prose-lg dark:prose-invert max-w-none">
+            <h1 id="story-heading" className="text-4xl md:text-5xl font-bold font-headline" data-testid="about-heading">My Story</h1>
+            <div className="prose prose-lg dark:prose-invert max-w-none" data-testid="about-story-content">
                 <p>
                     I was born in Karachi, Pakistan to a Mexican father and an American mother. We moved to Hong Kong when I was 3 and then, finally, to Connecticut when I was 7. After attending elementary and middle school there, I spent my high school years at Northfield Mount Hermon - a college preparatory boarding school in Western Massachusetts.
                 </p>

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -57,21 +58,22 @@ export function Chatbot() {
         className="fixed bottom-6 right-6 rounded-full w-16 h-16 shadow-lg z-50"
         onClick={() => setIsOpen(true)}
         aria-label="Open Chatbot"
+        data-testid="chatbot-open-button"
       >
         <MessageSquare className="w-8 h-8" />
       </Button>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetContent className="w-full max-w-lg flex flex-col p-0">
+        <SheetContent className="w-full max-w-lg flex flex-col p-0" data-testid="chatbot-sheet">
           <SheetHeader className="p-6 pb-2">
             <SheetTitle className="flex items-center gap-2 font-headline">
               <Bot />
               Chat with Kyra
             </SheetTitle>
           </SheetHeader>
-          <ScrollArea className="flex-1 p-6" ref={scrollAreaRef} aria-live="polite">
+          <ScrollArea className="flex-1 p-6" ref={scrollAreaRef} aria-live="polite" data-testid="chatbot-messages-container">
             <div className="space-y-6">
               {messages.map((msg, index) => (
-                <div key={index} className={cn("flex items-start gap-3", msg.role === 'user' ? 'justify-end' : 'justify-start')}>
+                <div key={index} className={cn("flex items-start gap-3", msg.role === 'user' ? 'justify-end' : 'justify-start')} data-testid={`chatbot-message-${index}`}>
                   {msg.role === 'model' && (
                     <Avatar className="w-8 h-8">
                       <AvatarFallback><Bot size={20} /></AvatarFallback>
@@ -109,8 +111,9 @@ export function Chatbot() {
                 placeholder="Ask a question..."
                 autoComplete="off"
                 disabled={isLoading}
+                data-testid="chatbot-input"
               />
-              <Button type="submit" size="icon" disabled={isLoading} aria-label="Send Message">
+              <Button type="submit" size="icon" disabled={isLoading} aria-label="Send Message" data-testid="chatbot-send-button">
                 <Send className="w-4 h-4" />
               </Button>
             </form>

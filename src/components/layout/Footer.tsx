@@ -1,9 +1,10 @@
+
 import { Github, Twitter, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t bg-card">
+    <footer className="w-full border-t bg-card" data-testid="footer">
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-8 px-4 sm:flex-row">
         <div className="text-center sm:text-left">
           <p className="text-sm text-muted-foreground">
@@ -14,13 +15,13 @@ export default function Footer() {
           </p>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="#" aria-label="GitHub">
+          <Link href="#" aria-label="GitHub" data-testid="footer-github-link">
             <Github className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
-          <Link href="#" aria-label="Twitter">
+          <Link href="#" aria-label="Twitter" data-testid="footer-twitter-link">
             <Twitter className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
-          <Link href="#" aria-label="LinkedIn">
+          <Link href="#" aria-label="LinkedIn" data-testid="footer-linkedin-link">
             <Linkedin className="h-5 w-5 text-muted-foreground transition-colors hover:text-foreground" />
           </Link>
         </div>

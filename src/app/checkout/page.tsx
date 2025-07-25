@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from "react";
@@ -70,16 +71,16 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="container mx-auto py-16 px-4">
+    <div className="container mx-auto py-16 px-4" data-testid="checkout-page">
       <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold font-headline">Checkout</h1>
+        <h1 className="text-4xl md:text-5xl font-bold font-headline" data-testid="checkout-heading">Checkout</h1>
         <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
           Complete your order by providing your details below.
         </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-testid="checkout-form">
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
@@ -94,7 +95,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>First Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John" {...field} />
+                          <Input placeholder="John" {...field} data-testid="checkout-first-name-input" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -107,7 +108,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>Last Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Doe" {...field} />
+                          <Input placeholder="Doe" {...field} data-testid="checkout-last-name-input" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -121,7 +122,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Address</FormLabel>
                           <FormControl>
-                            <Input placeholder="123 Main St" {...field} />
+                            <Input placeholder="123 Main St" {...field} data-testid="checkout-address-input" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -135,7 +136,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>City</FormLabel>
                         <FormControl>
-                          <Input placeholder="San Francisco" {...field} />
+                          <Input placeholder="San Francisco" {...field} data-testid="checkout-city-input" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -148,7 +149,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>State</FormLabel>
                         <FormControl>
-                          <Input placeholder="CA" {...field} />
+                          <Input placeholder="CA" {...field} data-testid="checkout-state-input" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -161,7 +162,7 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>ZIP Code</FormLabel>
                         <FormControl>
-                          <Input placeholder="94107" {...field} />
+                          <Input placeholder="94107" {...field} data-testid="checkout-zip-input" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -183,7 +184,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Card Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="**** **** **** 1234" {...field} />
+                            <Input placeholder="**** **** **** 1234" {...field} data-testid="checkout-card-number-input" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -197,7 +198,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Expiry Date</FormLabel>
                           <FormControl>
-                            <Input placeholder="MM / YY" {...field} />
+                            <Input placeholder="MM / YY" {...field} data-testid="checkout-expiry-date-input" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -210,7 +211,7 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>CVC</FormLabel>
                           <FormControl>
-                            <Input placeholder="123" {...field} />
+                            <Input placeholder="123" {...field} data-testid="checkout-cvc-input" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -247,11 +248,11 @@ export default function CheckoutPage() {
                   <p>$113.24</p>
                 </div>
                 <div className="mt-4 space-y-2">
-                  <Button type="submit" className="w-full" size="lg">Place Order</Button>
-                  <Button type="button" variant="outline" className="w-full" onClick={fillFormForTesting}>Fill Form (Debug)</Button>
+                  <Button type="submit" className="w-full" size="lg" data-testid="checkout-place-order-button">Place Order</Button>
+                  <Button type="button" variant="outline" className="w-full" onClick={fillFormForTesting} data-testid="checkout-fill-form-button">Fill Form (Debug)</Button>
                 </div>
                 <AlertDialog open={isAlertOpen} onOpenChange={setIsAlertOpen}>
-                  <AlertDialogContent>
+                  <AlertDialogContent data-testid="checkout-confirmation-dialog">
                     <AlertDialogHeader>
                       <AlertDialogTitle>Order Confirmation</AlertDialogTitle>
                       <AlertDialogDescription>
@@ -259,7 +260,7 @@ export default function CheckoutPage() {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction>OK</AlertDialogAction>
+                      <AlertDialogAction data-testid="checkout-confirmation-ok-button">OK</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
