@@ -9,7 +9,7 @@ export default function AboutPage() {
           <div className="md:col-span-1 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src="https://i.imgur.com/8a1eT3R.jpg"
+                src="/assets/kyler-chavez.jpg"
                 alt="A portrait of Kyler Chavez."
                 fill
                 className="object-cover"
