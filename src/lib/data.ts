@@ -37,7 +37,7 @@ export const productsData: Product[] = [
     name: 'Quantum Widget',
     description: 'A revolutionary widget that operates at the quantum level. Features include superposition and entanglement for unparalleled performance.',
     price: 99.99,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/quantum-widget.jpg',
     aiHint: 'glowing cube'
   },
   {
@@ -45,7 +45,7 @@ export const productsData: Product[] = [
     name: 'Hyper-Threaded Mouse',
     description: 'Experience zero latency with our hyper-threaded computer mouse. Perfect for gaming and professional design work.',
     price: 75.50,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/hyper-threaded-mouse.jpg',
     aiHint: 'gaming mouse'
   },
   {
@@ -53,7 +53,7 @@ export const productsData: Product[] = [
     name: 'Cybernetic Keyboard',
     description: 'A mechanical keyboard with a direct neural interface (adapter sold separately). Typing has never been more intuitive.',
     price: 249.99,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/cybernetic-keyboard.jpg',
     aiHint: 'mechanical keyboard'
   },
   {
@@ -61,7 +61,7 @@ export const productsData: Product[] = [
     name: 'AI-Powered Coffee Mug',
     description: 'This smart mug keeps your coffee at the perfect temperature and provides daily affirmations powered by a tiny AI.',
     price: 49.99,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/ai-powered-coffee-mug.jpg',
     aiHint: 'smart mug'
   },
   {
@@ -69,7 +69,7 @@ export const productsData: Product[] = [
     name: 'Holographic Desk Plant',
     description: 'A beautiful, maintenance-free holographic plant for your desk. Choose from over 100 species.',
     price: 39.99,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/holographic-desk-plant.jpg',
     aiHint: 'holographic plant'
   },
   {
@@ -77,7 +77,7 @@ export const productsData: Product[] = [
     name: 'Anti-Gravity Pen',
     description: 'Write upside down, underwater, or in zero gravity. This pen defies physics for the ultimate writing experience.',
     price: 29.99,
-    imageUrl: 'https://placehold.co/400x400.png',
+    imageUrl: '/assets/anti-gravity-pen.jpg',
     aiHint: 'floating pen'
   },
 ];
