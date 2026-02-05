@@ -2,7 +2,7 @@
 {
   "about": {
     "portrait": {
-      "src": "/assets/kyler-chavez.jpg",
+      "src": "/assets/kyler-chavez.png",
       "width": 800,
       "height": 800,
       "alt": "A portrait of Kyler Chavez"
@@ -10,37 +10,37 @@
   },
   "store": {
     "prod_001": {
-      "src": "/assets/prod_001.jpg",
+      "src": "/assets/prod_001.png",
       "width": 600,
       "height": 600,
       "alt": "Quantum Widget"
     },
     "prod_002": {
-      "src": "/assets/prod_002.jpg",
+      "src": "/assets/prod_002.png",
       "width": 600,
       "height": 600,
       "alt": "Hyper-Threaded Mouse"
     },
     "prod_003": {
-      "src": "/assets/prod_003.jpg",
+      "src": "/assets/prod_003.png",
       "width": 600,
       "height": 600,
       "alt": "Cybernetic Keyboard"
     },
     "prod_004": {
-      "src": "/assets/prod_004.jpg",
+      "src": "/assets/prod_004.png",
       "width": 600,
       "height": 600,
       "alt": "AI-Powered Coffee Mug"
     },
     "prod_005": {
-      "src": "/assets/prod_005.jpg",
+      "src": "/assets/prod_005.png",
       "width": 600,
       "height": 600,
       "alt": "Holographic Desk Plant"
     },
     "prod_006": {
-      "src": "/assets/prod_006.jpg",
+      "src": "/assets/prod_006.png",
       "width": 600,
       "height": 600,
       "alt": "Anti-Gravity Pen"
