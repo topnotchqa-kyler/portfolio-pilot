@@ -1,0 +1,57 @@
+
+{
+  "about": {
+    "portrait": {
+      "src": "/assets/kyler-chavez.jpg",
+      "width": 800,
+      "height": 800,
+      "alt": "A portrait of Kyler Chavez"
+    }
+  },
+  "store": {
+    "prod_001": {
+      "src": "/assets/prod_001.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "Quantum Widget"
+    },
+    "prod_002": {
+      "src": "/assets/prod_002.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "Hyper-Threaded Mouse"
+    },
+    "prod_003": {
+      "src": "/assets/prod_003.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "Cybernetic Keyboard"
+    },
+    "prod_004": {
+      "src": "/assets/prod_004.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "AI-Powered Coffee Mug"
+    },
+    "prod_005": {
+      "src": "/assets/prod_005.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "Holographic Desk Plant"
+    },
+    "prod_006": {
+      "src": "/assets/prod_006.jpg",
+      "width": 600,
+      "height": 600,
+      "alt": "Anti-Gravity Pen"
+    }
+  },
+  "projects": {
+    "test_automation": {
+      "src": "https://webdriver.io/img/webdriverio.png",
+      "width": 400,
+      "height": 400,
+      "alt": "WebdriverIO logo"
+    }
+  }
+}
