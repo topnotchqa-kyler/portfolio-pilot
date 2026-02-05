@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { Chatbot } from '@/components/Chatbot';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import { cn } from '@/lib/utils';
+import { checkAuth } from '@/lib/auth';
 
 const fontSans = Inter({
   subsets: ['latin'],
@@ -23,16 +24,18 @@ export const metadata: Metadata = {
   description: "Welcome to my testing playground.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isLoggedIn = await checkAuth();
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("font-body antialiased", fontSans.variable, fontSerif.variable)}>
         <div className="flex min-h-screen flex-col">
-          <Header />
+          <Header isLoggedIn={isLoggedIn} />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
