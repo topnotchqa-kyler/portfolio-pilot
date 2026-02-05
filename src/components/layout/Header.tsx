@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { Menu, Shapes, User } from 'lucide-react';
 import { checkAuth } from '@/lib/auth';
 
@@ -54,23 +54,31 @@ export default async function Header() {
             </SheetTrigger>
             <SheetContent side="right" data-testid="mobile-nav-sheet">
               <nav className="grid gap-6 text-lg font-medium mt-8">
-                <Link href="/" className="flex items-center gap-2 font-bold font-headline text-lg mb-4" data-testid="mobile-nav-logo-link">
-                  <Shapes className="h-6 w-6" />
-                  <span>Kyler's Testing Playground</span>
-                </Link>
-                {navLinks.map(link => (
-                  <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground" data-testid={`mobile-${link.testId}`}>
-                    {link.label}
+                <SheetClose asChild>
+                  <Link href="/" className="flex items-center gap-2 font-bold font-headline text-lg mb-4" data-testid="mobile-nav-logo-link">
+                    <Shapes className="h-6 w-6" />
+                    <span>Kyler's Testing Playground</span>
                   </Link>
+                </SheetClose>
+                {navLinks.map(link => (
+                  <SheetClose asChild key={link.href}>
+                    <Link href={link.href} className="text-muted-foreground hover:text-foreground" data-testid={`mobile-${link.testId}`}>
+                      {link.label}
+                    </Link>
+                  </SheetClose>
                 ))}
                  {isLoggedIn ? (
-                    <Button asChild>
-                        <Link href="/dashboard" data-testid="mobile-header-dashboard-button">Dashboard</Link>
-                    </Button>
+                    <SheetClose asChild>
+                      <Button asChild>
+                          <Link href="/dashboard" data-testid="mobile-header-dashboard-button">Dashboard</Link>
+                      </Button>
+                    </SheetClose>
                 ) : (
-                    <Button asChild>
-                        <Link href="/login" data-testid="mobile-header-login-button">Login</Link>
-                    </Button>
+                    <SheetClose asChild>
+                      <Button asChild>
+                          <Link href="/login" data-testid="mobile-header-login-button">Login</Link>
+                      </Button>
+                    </SheetClose>
                 )}
               </nav>
             </SheetContent>
