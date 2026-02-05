@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Pilcrow, User } from 'lucide-react';
+import { Menu, Shapes, User } from 'lucide-react';
 import { checkAuth } from '@/lib/auth';
 
 const navLinks = [
@@ -22,7 +22,7 @@ export default async function Header() {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2 font-bold font-headline text-lg" data-testid="header-logo-link">
           <div className="p-2 bg-primary text-primary-foreground rounded-md">
-            <Pilcrow />
+            <Shapes className="h-5 w-5" />
           </div>
           <span>Kyler's Testing Playground</span>
         </Link>
@@ -55,7 +55,7 @@ export default async function Header() {
             <SheetContent side="right" data-testid="mobile-nav-sheet">
               <nav className="grid gap-6 text-lg font-medium mt-8">
                 <Link href="/" className="flex items-center gap-2 font-bold font-headline text-lg mb-4" data-testid="mobile-nav-logo-link">
-                  <Pilcrow className="h-6 w-6" />
+                  <Shapes className="h-6 w-6" />
                   <span>Kyler's Testing Playground</span>
                 </Link>
                 {navLinks.map(link => (
