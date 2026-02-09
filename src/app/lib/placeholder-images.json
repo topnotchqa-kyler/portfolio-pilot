@@ -59,16 +59,10 @@
       "height": 400,
       "alt": "Playwright logo"
     },
-    "selenium": {
-      "src": "https://www.selenium.dev/images/selenium_logo_square_red.png",
-      "width": 400,
-      "height": 400,
-      "alt": "Selenium logo"
-    },
     "cypress": {
-      "src": "https://raw.githubusercontent.com/cypress-io/cypress-icons/master/src/logo/cypress-logo-circle.png",
-      "width": 400,
-      "height": 400,
+      "src": "https://go.cypress.io/hs-fs/hubfs/Cypress_Logotype_Dark-Color.png?width=100&height=40&name=Cypress_Logotype_Dark-Color.png",
+      "width": 100,
+      "height": 40,
       "alt": "Cypress logo"
     }
   }

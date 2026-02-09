@@ -13,7 +13,7 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const isLogo = project.title.includes('WebdriverIO') || project.title.includes('Playwright') || project.title.includes('Selenium') || project.title.includes('Cypress');
+  const isLogo = project.title.includes('WebdriverIO') || project.title.includes('Playwright') || project.title.includes('Cypress');
 
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`project-card-${project.id}`}>

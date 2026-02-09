@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.selenium.dev',
+        hostname: 'go.cypress.io',
         port: '',
         pathname: '/**',
       },

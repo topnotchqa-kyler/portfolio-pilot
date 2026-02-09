@@ -32,15 +32,6 @@ export const projectsData: Project[] = [
     aiHint: 'playwright logo'
   },
   {
-    id: 4,
-    title: 'Selenium',
-    description: 'A robust test automation framework built with Selenium WebDriver for cross-browser testing of critical user flows and business logic.',
-    techStack: ['Selenium', 'Java', 'JUnit', 'Maven'],
-    imageUrl: placeholderImages.projects.selenium.src,
-    githubUrl: '#',
-    aiHint: 'selenium logo'
-  },
-  {
     id: 5,
     title: 'Cypress',
     description: 'A fast and reliable end-to-end testing suite developed with Cypress, ensuring a seamless user experience for modern web applications.',
