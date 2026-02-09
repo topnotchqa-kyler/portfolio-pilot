@@ -14,9 +14,9 @@ export type Project = {
 export const projectsData: Project[] = [
   {
     id: 2,
-    title: 'WebdriverIO',
-    description: 'A comprehensive test automation suite using WebdriverIO that covers the whole of the website - e-commerce, blog, form, and login authentication.',
-    techStack: ['WebdriverIO', 'TypeScript', 'Node.js'],
+    title: 'WebdriverIO & Cucumber',
+    description: 'A comprehensive test automation suite using WebdriverIO and Cucumber that covers the whole of the website - e-commerce, blog, form, and login authentication.',
+    techStack: ['WebdriverIO', 'TypeScript', 'Node.js', 'Cucumber'],
     imageUrl: placeholderImages.projects.test_automation.src,
     githubUrl: 'https://github.com/kchavez05/portfolio-site-testing.git',
     aiHint: 'testing framework logo'

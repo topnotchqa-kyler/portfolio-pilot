@@ -19,7 +19,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             src={project.imageUrl} 
             alt={project.title} 
             fill 
-            className={`${project.title === 'WebdriverIO' ? 'object-contain' : 'object-cover'} p-4`} 
+            className={`${project.title.includes('WebdriverIO') ? 'object-contain' : 'object-cover'} p-4`} 
             data-ai-hint={project.aiHint} 
           />
       </div>
