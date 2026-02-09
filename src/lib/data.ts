@@ -14,7 +14,7 @@ export type Project = {
 export const projectsData: Project[] = [
   {
     id: 2,
-    title: 'Test Automation',
+    title: 'WebdriverIO',
     description: 'A comprehensive test automation suite using WebdriverIO that covers the whole of the website - e-commerce, blog, form, and login authentication.',
     techStack: ['WebdriverIO', 'TypeScript', 'Node.js'],
     imageUrl: placeholderImages.projects.test_automation.src,

@@ -1,5 +1,3 @@
-
-
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,7 +19,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             src={project.imageUrl} 
             alt={project.title} 
             fill 
-            className={`${project.title === 'Test Automation' ? 'object-contain' : 'object-cover'} p-4`} 
+            className={`${project.title === 'WebdriverIO' ? 'object-contain' : 'object-cover'} p-4`} 
             data-ai-hint={project.aiHint} 
           />
       </div>
