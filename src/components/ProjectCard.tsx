@@ -1,3 +1,4 @@
+
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +13,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const isLogo = project.title.includes('WebdriverIO') || project.title.includes('Playwright');
+
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`project-card-${project.id}`}>
       <div className="relative h-56 w-full bg-muted overflow-hidden">
@@ -19,7 +22,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             src={project.imageUrl} 
             alt={project.title} 
             fill 
-            className={`${project.title.includes('WebdriverIO') ? 'object-contain' : 'object-cover'} p-4`} 
+            className={`${isLogo ? 'object-contain' : 'object-cover'} p-4`} 
             data-ai-hint={project.aiHint} 
           />
       </div>

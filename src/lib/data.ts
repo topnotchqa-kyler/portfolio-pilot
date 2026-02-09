@@ -1,3 +1,4 @@
+
 import placeholderImages from '@/app/lib/placeholder-images.json';
 
 export type Project = {
@@ -21,6 +22,15 @@ export const projectsData: Project[] = [
     githubUrl: 'https://github.com/kchavez05/portfolio-site-testing.git',
     aiHint: 'testing framework logo'
   },
+  {
+    id: 3,
+    title: 'Playwright',
+    description: 'A comprehensive test automation suite using Playwright that covers the whole of the website - e-commerce, blog, form, and login authentication.',
+    techStack: ['Playwright', 'TypeScript', 'Node.js'],
+    imageUrl: placeholderImages.projects.playwright.src,
+    githubUrl: '#',
+    aiHint: 'playwright logo'
+  }
 ];
 
 export type Product = {

@@ -52,6 +52,12 @@
       "width": 400,
       "height": 400,
       "alt": "WebdriverIO logo"
+    },
+    "playwright": {
+      "src": "https://playwright.dev/img/playwright-logo.svg",
+      "width": 400,
+      "height": 400,
+      "alt": "Playwright logo"
     }
   }
 }
