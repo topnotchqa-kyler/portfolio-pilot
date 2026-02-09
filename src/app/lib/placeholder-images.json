@@ -10,37 +10,37 @@
   },
   "store": {
     "prod_001": {
-      "src": "/assets/quantum_widget.png",
+      "src": "/assets/prod_001.png",
       "width": 600,
       "height": 600,
       "alt": "Quantum Widget"
     },
     "prod_002": {
-      "src": "/assets/hyperthreaded_mouse.png",
+      "src": "/assets/prod_002.png",
       "width": 600,
       "height": 600,
       "alt": "Hyper-Threaded Mouse"
     },
     "prod_003": {
-      "src": "/assets/cybernetic_keyboard.png",
+      "src": "/assets/prod_003.png",
       "width": 600,
       "height": 600,
       "alt": "Cybernetic Keyboard"
     },
     "prod_004": {
-      "src": "/assets/ai_coffee_mug.png",
+      "src": "/assets/prod_004.png",
       "width": 600,
       "height": 600,
       "alt": "AI-Powered Coffee Mug"
     },
     "prod_005": {
-      "src": "/assets/holographic_desk_plant.png",
+      "src": "/assets/prod_005.png",
       "width": 600,
       "height": 600,
       "alt": "Holographic Desk Plant"
     },
     "prod_006": {
-      "src": "/assets/antigravity_pen.png",
+      "src": "/assets/prod_006.png",
       "width": 600,
       "height": 600,
       "alt": "Anti-Gravity Pen"
