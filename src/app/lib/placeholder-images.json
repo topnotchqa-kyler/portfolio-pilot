@@ -60,9 +60,9 @@
       "alt": "Playwright logo"
     },
     "cypress": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Cypress_Logo.svg",
-      "width": 600,
-      "height": 200,
+      "src": "https://raw.githubusercontent.com/cypress-io/cypress-icons/master/assets/logo/cypress-logo-dark.png",
+      "width": 800,
+      "height": 300,
       "alt": "Cypress logo"
     }
   }
