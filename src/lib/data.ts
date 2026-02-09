@@ -34,7 +34,7 @@ export const projectsData: Project[] = [
   {
     id: 5,
     title: 'Cypress',
-    description: 'A fast and reliable end-to-end testing suite developed with Cypress, ensuring a seamless user experience for modern web applications.',
+    description: 'A comprehensive test automation suite using Cypress that covers the whole of the website - e-commerce, blog, form, and login authentication.',
     techStack: ['Cypress', 'JavaScript', 'Node.js'],
     imageUrl: placeholderImages.projects.cypress.src,
     githubUrl: '#',
