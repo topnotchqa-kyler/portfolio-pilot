@@ -1,3 +1,4 @@
+
 'use server';
 
 import { z } from 'zod';
@@ -20,7 +21,7 @@ export async function getTestRecommendations(values: z.infer<typeof formSchema>)
     const result = await improveTestRecommendations(validatedFields.data);
     return { success: true, recommendations: result.recommendations };
   } catch (error) {
-    console.error('AI recommendation failed:', error);
-    return { success: false, error: 'Failed to get recommendations from the AI. Please try again later.' };
+    // Error is handled by returning failure state to the client
+    return { success: false, error: 'The AI service is currently unavailable. Please try again later.' };
   }
 }

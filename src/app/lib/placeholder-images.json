@@ -2,7 +2,7 @@
 {
   "about": {
     "portrait": {
-      "src": "/assets/kyler-chavez.jpg",
+      "src": "https://picsum.photos/seed/kyler/800/800",
       "width": 800,
       "height": 800,
       "alt": "A portrait of Kyler Chavez"
@@ -10,37 +10,37 @@
   },
   "store": {
     "prod_001": {
-      "src": "/assets/prod_001.png",
+      "src": "https://picsum.photos/seed/widget1/600/600",
       "width": 600,
       "height": 600,
       "alt": "Quantum Widget"
     },
     "prod_002": {
-      "src": "/assets/prod_002.png",
+      "src": "https://picsum.photos/seed/mouse/600/600",
       "width": 600,
       "height": 600,
       "alt": "Hyper-Threaded Mouse"
     },
     "prod_003": {
-      "src": "/assets/prod_003.png",
+      "src": "https://picsum.photos/seed/keyboard/600/600",
       "width": 600,
       "height": 600,
       "alt": "Cybernetic Keyboard"
     },
     "prod_004": {
-      "src": "/assets/prod_004.png",
+      "src": "https://picsum.photos/seed/mug/600/600",
       "width": 600,
       "height": 600,
       "alt": "AI-Powered Coffee Mug"
     },
     "prod_005": {
-      "src": "/assets/prod_005.png",
+      "src": "https://picsum.photos/seed/plant/600/600",
       "width": 600,
       "height": 600,
       "alt": "Holographic Desk Plant"
     },
     "prod_006": {
-      "src": "/assets/prod_006.png",
+      "src": "https://picsum.photos/seed/pen/600/600",
       "width": 600,
       "height": 600,
       "alt": "Anti-Gravity Pen"
@@ -60,7 +60,7 @@
       "alt": "Playwright logo"
     },
     "cypress": {
-      "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Cypress_logo.png/800px-Cypress_logo.png",
+      "src": "https://raw.githubusercontent.com/cypress-io/cypress/develop/packages/icons/assets/logo/cypress-bw.png",
       "width": 800,
       "height": 300,
       "alt": "Cypress logo"

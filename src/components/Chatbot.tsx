@@ -3,12 +3,12 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { MessageSquare, Send, Loader2, User, Bot } from 'lucide-react';
 import { chat, type Message } from '@/ai/flows/chat-flow';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 
 export function Chatbot() {
@@ -44,8 +44,7 @@ export function Chatbot() {
       const aiMessage: Message = { role: 'model', content: response };
       setMessages(prev => [...prev, aiMessage]);
     } catch (error) {
-      console.error("Chat error:", error);
-      const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting. Please try again later." };
+      const errorMessage: Message = { role: 'model', content: "I'm having a little trouble connecting right now. Can we try again in a moment?" };
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
@@ -72,6 +71,11 @@ export function Chatbot() {
           </SheetHeader>
           <ScrollArea className="flex-1 p-6" ref={scrollAreaRef} aria-live="polite" data-testid="chatbot-messages-container">
             <div className="space-y-6">
+              {messages.length === 0 && (
+                <div className="text-center text-muted-foreground py-8">
+                  <p>Hi! I'm Kyra. Ask me anything about Kyler's work or projects!</p>
+                </div>
+              )}
               {messages.map((msg, index) => (
                 <div key={index} className={cn("flex items-start gap-3", msg.role === 'user' ? 'justify-end' : 'justify-start')} data-testid={`chatbot-message-${index}`}>
                   {msg.role === 'model' && (
