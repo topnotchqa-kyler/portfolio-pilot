@@ -7,6 +7,7 @@ import { Chatbot } from '@/components/Chatbot';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { checkAuth } from '@/lib/auth';
+import { CartProvider } from '@/context/CartContext';
 
 const fontSans = Inter({
   subsets: ['latin'],
@@ -34,13 +35,15 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={cn("font-body antialiased", fontSans.variable, fontSerif.variable)}>
-        <div className="flex min-h-screen flex-col">
-          <Header isLoggedIn={isLoggedIn} />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </div>
-        <Chatbot />
-        <Toaster />
+        <CartProvider>
+          <div className="flex min-h-screen flex-col">
+            <Header isLoggedIn={isLoggedIn} />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </div>
+          <Chatbot />
+          <Toaster />
+        </CartProvider>
       </body>
     </html>
   );

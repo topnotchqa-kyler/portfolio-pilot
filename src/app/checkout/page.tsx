@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState } from "react";
@@ -19,6 +18,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { useCart } from "@/context/CartContext";
+import { Trash2, ShoppingBag } from "lucide-react";
+import Link from "next/link";
 
 const checkoutSchema = z.object({
   firstName: z.string().min(1, { message: "First name is required" }),
@@ -27,8 +29,8 @@ const checkoutSchema = z.object({
   city: z.string().min(1, { message: "City is required" }),
   state: z.string().min(1, { message: "State is required" }),
   zip: z.string().min(1, { message: "ZIP code is required" }),
-  cardNumber: z.string().min(1, { message: "Card number is required" }).regex(/^(?:[0-9]{4} ){3}[0-9]{4}$/, { message: "Invalid card number format (use **** **** **** ****)"}),
-  expiryDate: z.string().min(1, { message: "Expiry date is required" }).regex(/^(0[1-9]|1[0-2]) \/ ([0-9]{2})$/, { message: "Invalid format (use MM / YY)"}),
+  cardNumber: z.string().min(1, { message: "Card number is required" }).regex(/^(?:[0-9]{4} ){3}[0-9]{4}$/, { message: "Invalid format (**** **** **** ****)"}),
+  expiryDate: z.string().min(1, { message: "Expiry date is required" }).regex(/^(0[1-9]|1[0-2]) \/ ([0-9]{2})$/, { message: "Invalid format (MM / YY)"}),
   cvc: z.string().min(3, { message: "CVC must be 3 digits" }).max(3, { message: "CVC must be 3 digits" }),
 });
 
@@ -36,6 +38,7 @@ type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
+  const { cart, totalPrice, removeFromCart, clearCart } = useCart();
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -68,20 +71,76 @@ export default function CheckoutPage() {
 
   const onSubmit = (values: CheckoutFormValues) => {
     setIsAlertOpen(true);
+    clearCart();
   };
+
+  const shipping = cart.length > 0 ? 5.00 : 0;
+  const tax = totalPrice * 0.0825;
+  const grandTotal = totalPrice + shipping + tax;
+
+  if (cart.length === 0) {
+    return (
+      <div className="container mx-auto py-16 px-4 text-center" data-testid="empty-cart-view">
+        <div className="flex flex-col items-center gap-6">
+          <div className="bg-muted p-8 rounded-full">
+            <ShoppingBag className="h-16 w-16 text-muted-foreground" />
+          </div>
+          <h1 className="text-4xl font-bold font-headline">Your cart is empty</h1>
+          <p className="text-muted-foreground text-lg max-w-md">
+            Looks like you haven't added anything to your cart yet. Head over to our store to discover amazing products!
+          </p>
+          <Button asChild size="lg">
+            <Link href="/store">Browse Store</Link>
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-16 px-4" data-testid="checkout-page">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold font-headline" data-testid="checkout-heading">Checkout</h1>
         <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
-          Complete your order by providing your details below.
+          Review your items and provide your details to complete your order.
         </p>
       </div>
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-3 gap-8" data-testid="checkout-form">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="font-headline">Your Items</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {cart.map((item) => (
+                  <div key={item.id} className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                      <div className="h-16 w-16 bg-muted rounded overflow-hidden flex-shrink-0 relative">
+                        <img src={item.imageUrl} alt={item.name} className="object-cover w-full h-full p-1" />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
+                      <Button 
+                        variant="ghost" 
+                        size="icon" 
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-destructive hover:text-destructive/80 hover:bg-destructive/10"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle className="font-headline">Shipping Information</CardTitle>
@@ -171,9 +230,9 @@ export default function CheckoutPage() {
                 </div>
               </CardContent>
 
-              <CardHeader className="mt-4">
+              <CardHeader className="mt-4 border-t">
                 <CardTitle className="font-headline">Payment Details</CardTitle>
-                <CardDescription>This is a demo checkout. Do not enter real credit card information.</CardDescription>
+                <CardDescription>Demo checkout only. Use dummy data.</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -224,30 +283,29 @@ export default function CheckoutPage() {
           </div>
 
           <div className="lg:col-span-1">
-            <Card>
+            <Card className="sticky top-24">
               <CardHeader>
                 <CardTitle className="font-headline">Order Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
-                  <p>Quantum Widget</p>
-                  <p>$99.99</p>
+                  <p>Subtotal</p>
+                  <p>${totalPrice.toFixed(2)}</p>
                 </div>
-                <Separator />
                 <div className="flex justify-between">
                   <p>Shipping</p>
-                  <p>$5.00</p>
+                  <p>${shipping.toFixed(2)}</p>
                 </div>
                 <div className="flex justify-between">
-                  <p>Tax</p>
-                  <p>$8.25</p>
+                  <p>Tax (8.25%)</p>
+                  <p>${tax.toFixed(2)}</p>
                 </div>
                 <Separator />
-                <div className="flex justify-between font-bold text-lg">
+                <div className="flex justify-between font-bold text-lg text-primary">
                   <p>Total</p>
-                  <p>$113.24</p>
+                  <p>${grandTotal.toFixed(2)}</p>
                 </div>
-                <div className="mt-4 space-y-2">
+                <div className="mt-6 space-y-3">
                   <Button type="submit" className="w-full" size="lg" data-testid="checkout-place-order-button">Place Order</Button>
                   <Button type="button" variant="outline" className="w-full" onClick={fillFormForTesting} data-testid="checkout-fill-form-button">Fill Form (Debug)</Button>
                 </div>
@@ -256,11 +314,13 @@ export default function CheckoutPage() {
                     <AlertDialogHeader>
                       <AlertDialogTitle>Order Confirmation</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This is a demonstration store. No order has been placed and your card has not been charged. Thank you for trying out the checkout flow!
+                        Thank you for your order! This is a demonstration store. No items will be shipped and your card has not been charged.
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction data-testid="checkout-confirmation-ok-button">OK</AlertDialogAction>
+                      <AlertDialogAction data-testid="checkout-confirmation-ok-button" asChild>
+                        <Link href="/">OK</Link>
+                      </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>

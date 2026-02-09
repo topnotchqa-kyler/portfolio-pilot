@@ -4,7 +4,9 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Shapes } from 'lucide-react';
+import { Menu, Shapes, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
+import { Badge } from '@/components/ui/badge';
 
 const navLinks = [
   { href: '/', label: 'Home', testId: 'nav-home-link' },
@@ -17,6 +19,7 @@ const navLinks = [
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { totalItems } = useCart();
 
   const closeMenu = () => setIsOpen(false);
 
@@ -27,16 +30,29 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           <div className="p-2 bg-primary text-primary-foreground rounded-md">
             <Shapes className="h-5 w-5" />
           </div>
-          <span>Kyler's Testing Playground</span>
+          <span className="hidden sm:inline">Kyler's Testing Playground</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium" data-testid="desktop-nav">
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium" data-testid="desktop-nav">
           {navLinks.map(link => (
             <Link key={link.href} href={link.href} className="text-muted-foreground transition-colors hover:text-foreground" data-testid={link.testId}>
               {link.label}
             </Link>
           ))}
         </nav>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
+          <Link href="/checkout" className="relative p-2 hover:bg-accent rounded-full transition-colors" data-testid="header-cart-link">
+            <ShoppingCart className="h-5 w-5" />
+            {totalItems > 0 && (
+              <Badge 
+                className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]" 
+                variant="default"
+                data-testid="cart-counter"
+              >
+                {totalItems}
+              </Badge>
+            )}
+          </Link>
+
           <div className="hidden md:block">
             {isLoggedIn ? (
               <Button asChild>
@@ -50,7 +66,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           </div>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden" data-testid="mobile-nav-trigger">
+              <Button variant="outline" size="icon" className="lg:hidden" data-testid="mobile-nav-trigger">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
