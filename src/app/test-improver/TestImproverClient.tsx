@@ -43,9 +43,9 @@ export default function TestImproverClient() {
     const result = await getTestRecommendations(values);
 
     if (result.success) {
-      setRecommendations(result.recommendations);
+      setRecommendations(result.recommendations ?? null);
     } else {
-      setError(result.error);
+      setError(result.error ?? null);
     }
     setIsLoading(false);
   }

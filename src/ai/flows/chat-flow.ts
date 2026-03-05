@@ -49,10 +49,10 @@ const chatFlow = ai.defineFlow(
     He and his wife, Kaitlyn, have a son named Ryker Allen. They live in Mead, Colorado with their three cats and enjoy gardening and cooking.`;
     
     const llmResponse = await ai.generate({
-      prompt: message,
-      history: [
+      messages: [
         {role: 'system', content: [{text: systemPrompt}]},
-        ...history.map(h => ({role: h.role, content: [{text: h.content}]}))
+        ...history.map(h => ({role: h.role, content: [{text: h.content}]})),
+        {role: 'user', content: [{text: message}]},
       ],
     });
 

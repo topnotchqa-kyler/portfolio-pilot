@@ -1,11 +1,50 @@
+'use client';
 
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Mail, Phone, MapPin, CheckCircle, AlertCircle } from "lucide-react";
+
+const contactSchema = z.object({
+  name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters" }).max(1000, { message: "Message must be 1000 characters or fewer" }),
+});
+
+type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactPage() {
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactSchema),
+    defaultValues: { name: '', email: '', message: '' },
+  });
+
+  const onSubmit = async (values: ContactFormValues) => {
+    try {
+      const response = await fetch('https://formspree.io/f/xwpqlzgw', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      });
+      if (response.ok) {
+        setSubmitStatus('success');
+        form.reset();
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch {
+      setSubmitStatus('error');
+    }
+  };
+
   return (
     <div className="container mx-auto py-16 px-4" data-testid="contact-page">
       <div className="text-center mb-12">
@@ -40,30 +79,88 @@ export default function ContactPage() {
                 </div>
             </div>
         </div>
-        
+
         <Card>
           <CardHeader>
             <CardTitle className="font-headline">Send me a message</CardTitle>
             <CardDescription>I'll get back to you as soon as possible.</CardDescription>
           </CardHeader>
           <CardContent>
-            <form action="https://formspree.io/f/xwpqlzgw" method="POST" className="space-y-4" data-testid="contact-form">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">Name</label>
-                  <Input id="name" name="name" placeholder="Your Name" required data-testid="contact-name-input" />
-                </div>
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">Email</label>
-                  <Input id="email" name="email" type="email" placeholder="Your Email" required data-testid="contact-email-input" />
-                </div>
+            {submitStatus === 'success' ? (
+              <div className="flex flex-col items-center gap-4 py-8 text-center" data-testid="contact-success-message">
+                <CheckCircle className="h-12 w-12 text-green-500" />
+                <p className="text-lg font-semibold">Message sent!</p>
+                <p className="text-muted-foreground">Thanks for reaching out. I'll get back to you soon.</p>
+                <Button variant="outline" onClick={() => setSubmitStatus('idle')} data-testid="contact-send-another-button">
+                  Send another message
+                </Button>
               </div>
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">Message</label>
-                <Textarea id="message" name="message" placeholder="Your Message" required rows={6} data-testid="contact-message-textarea" />
-              </div>
-              <Button type="submit" className="w-full" data-testid="contact-send-button">Send Message</Button>
-            </form>
+            ) : (
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" data-testid="contact-form">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your Name" {...field} data-testid="contact-name-input" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="Your Email" {...field} data-testid="contact-email-input" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Your Message" rows={6} maxLength={1000} {...field} data-testid="contact-message-textarea" />
+                        </FormControl>
+                        <div className="flex justify-between items-center">
+                          <FormMessage />
+                          <span className={`text-xs ml-auto ${field.value.length > 900 ? 'text-destructive' : 'text-muted-foreground'}`} data-testid="contact-message-char-count">
+                            {field.value.length}/1000
+                          </span>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  {submitStatus === 'error' && (
+                    <div className="flex items-center gap-2 text-destructive text-sm" data-testid="contact-error-message">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>Something went wrong. Please try again.</span>
+                    </div>
+                  )}
+                  <Button
+                    type="submit"
+                    className="w-full"
+                    disabled={form.formState.isSubmitting}
+                    data-testid="contact-send-button"
+                  >
+                    {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
+                  </Button>
+                </form>
+              </Form>
+            )}
           </CardContent>
         </Card>
       </div>

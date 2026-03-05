@@ -3,7 +3,14 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
-import type { BlogPost } from './data';
+
+export type BlogPost = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  content: string;
+};
 
 const postsDirectory = path.join(process.cwd(), 'src/content/blog');
 

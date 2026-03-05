@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-
-const AUTH_COOKIE_NAME = 'kylers-testing-playground-auth';
+import { AUTH_COOKIE_NAME } from '@/lib/auth';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;

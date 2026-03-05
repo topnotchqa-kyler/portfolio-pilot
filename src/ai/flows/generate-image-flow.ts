@@ -37,10 +37,13 @@ const generateImageFlow = ai.defineFlow(
         responseModalities: ['TEXT', 'IMAGE'],
       },
     });
-    
+
+    if (!media) {
+      throw new Error('Image generation failed to produce an image.');
+    }
     const imageUrl = media.url;
     if (!imageUrl) {
-        throw new Error('Image generation failed to produce an image.');
+      throw new Error('Image generation failed to return an image URL.');
     }
 
     return imageUrl;

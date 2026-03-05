@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-wdio-tests",
+  "version": "1.0.0",
+  "description": "WebdriverIO + Cucumber test suite for portfolio site",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc",
+    "test": "tsc && { node_modules/.bin/chromedriver --port=9515 --log-level=OFF & CDPID=$!; sleep 2; node_modules/.bin/wdio run wdio.conf.js; STATUS=$?; kill $CDPID 2>/dev/null; exit $STATUS; }"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@wdio/cli": "^8.38.0",
+    "@wdio/cucumber-framework": "^8.38.0",
+    "@wdio/local-runner": "^8.38.0",
+    "@wdio/spec-reporter": "^8.38.0",
+    "chromedriver": "^145.0.6",
+    "typescript": "^5.4.5",
+    "wdio-chromedriver-service": "^7.3.2"
+  }
+}

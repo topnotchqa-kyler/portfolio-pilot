@@ -19,8 +19,9 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useCart } from "@/context/CartContext";
-import { Trash2, ShoppingBag } from "lucide-react";
+import { Trash2, ShoppingBag, Plus, Minus, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const checkoutSchema = z.object({
   firstName: z.string().min(1, { message: "First name is required" }),
@@ -28,17 +29,18 @@ const checkoutSchema = z.object({
   address: z.string().min(1, { message: "Address is required" }),
   city: z.string().min(1, { message: "City is required" }),
   state: z.string().min(1, { message: "State is required" }),
-  zip: z.string().min(1, { message: "ZIP code is required" }),
+  zip: z.string().regex(/^\d{5}$/, { message: "ZIP code must be 5 digits" }),
   cardNumber: z.string().min(1, { message: "Card number is required" }).regex(/^(?:[0-9]{4} ){3}[0-9]{4}$/, { message: "Invalid format (**** **** **** ****)"}),
   expiryDate: z.string().min(1, { message: "Expiry date is required" }).regex(/^(0[1-9]|1[0-2]) \/ ([0-9]{2})$/, { message: "Invalid format (MM / YY)"}),
-  cvc: z.string().min(3, { message: "CVC must be 3 digits" }).max(3, { message: "CVC must be 3 digits" }),
+  cvc: z.string().regex(/^\d{3}$/, { message: "CVC must be 3 digits" }),
 });
 
 type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 export default function CheckoutPage() {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
-  const { cart, totalPrice, removeFromCart, clearCart } = useCart();
+  const { cart, totalPrice, addToCart, removeFromCart, decrementQuantity, clearCart } = useCart();
+  const router = useRouter();
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -69,9 +71,8 @@ export default function CheckoutPage() {
     });
   };
 
-  const onSubmit = (values: CheckoutFormValues) => {
+  const onSubmit = (_values: CheckoutFormValues) => {
     setIsAlertOpen(true);
-    clearCart();
   };
 
   const shipping = cart.length > 0 ? 5.00 : 0;
@@ -99,6 +100,14 @@ export default function CheckoutPage() {
 
   return (
     <div className="container mx-auto py-16 px-4" data-testid="checkout-page">
+      <button
+        onClick={() => router.back()}
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
+        data-testid="checkout-back-button"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Back
+      </button>
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold font-headline" data-testid="checkout-heading">Checkout</h1>
         <p className="text-lg text-muted-foreground mt-4 max-w-2xl mx-auto">
@@ -122,16 +131,43 @@ export default function CheckoutPage() {
                       </div>
                       <div>
                         <p className="font-semibold">{item.name}</p>
-                        <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="icon"
+                            className="h-6 w-6"
+                            onClick={() => decrementQuantity(item.id)}
+                            aria-label={`Decrease quantity of ${item.name}`}
+                            data-testid={`checkout-decrement-${item.id}`}
+                          >
+                            <Minus className="h-3 w-3" />
+                          </Button>
+                          <span className="text-sm w-6 text-center" data-testid={`checkout-quantity-${item.id}`}>{item.quantity}</span>
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="icon"
+                            className="h-6 w-6"
+                            onClick={() => addToCart(item)}
+                            aria-label={`Increase quantity of ${item.name}`}
+                            data-testid={`checkout-increment-${item.id}`}
+                          >
+                            <Plus className="h-3 w-3" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-4">
                       <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
-                      <Button 
-                        variant="ghost" 
-                        size="icon" 
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
                         onClick={() => removeFromCart(item.id)}
+                        aria-label={`Remove ${item.name} from cart`}
                         className="text-destructive hover:text-destructive/80 hover:bg-destructive/10"
+                        data-testid={`checkout-remove-${item.id}`}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -221,7 +257,16 @@ export default function CheckoutPage() {
                       <FormItem>
                         <FormLabel>ZIP Code</FormLabel>
                         <FormControl>
-                          <Input placeholder="94107" {...field} data-testid="checkout-zip-input" />
+                          <Input
+                            placeholder="94107"
+                            {...field}
+                            inputMode="numeric"
+                            onChange={(e) => {
+                              const digits = e.target.value.replace(/\D/g, '').slice(0, 5);
+                              field.onChange(digits);
+                            }}
+                            data-testid="checkout-zip-input"
+                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -243,7 +288,17 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Card Number</FormLabel>
                           <FormControl>
-                            <Input placeholder="**** **** **** 1234" {...field} data-testid="checkout-card-number-input" />
+                            <Input
+                              placeholder="**** **** **** 1234"
+                              {...field}
+                              inputMode="numeric"
+                              onChange={(e) => {
+                                const digits = e.target.value.replace(/\D/g, '').slice(0, 16);
+                                const formatted = digits.replace(/(.{4})/g, '$1 ').trim();
+                                field.onChange(formatted);
+                              }}
+                              data-testid="checkout-card-number-input"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -257,7 +312,19 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>Expiry Date</FormLabel>
                           <FormControl>
-                            <Input placeholder="MM / YY" {...field} data-testid="checkout-expiry-date-input" />
+                            <Input
+                              placeholder="MM / YY"
+                              {...field}
+                              inputMode="numeric"
+                              onChange={(e) => {
+                                const digits = e.target.value.replace(/\D/g, '').slice(0, 4);
+                                const formatted = digits.length > 2
+                                  ? digits.slice(0, 2) + ' / ' + digits.slice(2)
+                                  : digits;
+                                field.onChange(formatted);
+                              }}
+                              data-testid="checkout-expiry-date-input"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -270,7 +337,16 @@ export default function CheckoutPage() {
                         <FormItem>
                           <FormLabel>CVC</FormLabel>
                           <FormControl>
-                            <Input placeholder="123" {...field} data-testid="checkout-cvc-input" />
+                            <Input
+                              placeholder="123"
+                              {...field}
+                              inputMode="numeric"
+                              onChange={(e) => {
+                                const digits = e.target.value.replace(/\D/g, '').slice(0, 3);
+                                field.onChange(digits);
+                              }}
+                              data-testid="checkout-cvc-input"
+                            />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -318,7 +394,7 @@ export default function CheckoutPage() {
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogAction data-testid="checkout-confirmation-ok-button" asChild>
+                      <AlertDialogAction data-testid="checkout-confirmation-ok-button" onClick={clearCart} asChild>
                         <Link href="/">OK</Link>
                       </AlertDialogAction>
                     </AlertDialogFooter>
