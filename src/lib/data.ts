@@ -10,6 +10,11 @@ export type Project = {
   liveUrl?: string;
   githubUrl?: string;
   aiHint?: string;
+  inProgress?: boolean;
+  /** Identifies this project as a live-demo-able test suite */
+  testSuiteSlug?: 'wdio' | 'playwright' | 'cypress';
+  /** Identifies this project as a manual test case collection */
+  manualTestsSlug?: 'manual';
 };
 
 export const projectsData: Project[] = [
@@ -19,8 +24,9 @@ export const projectsData: Project[] = [
     description: 'A comprehensive test automation suite using WebdriverIO and Cucumber that covers the whole of the website - e-commerce, blog, form, and login authentication.',
     techStack: ['WebdriverIO', 'TypeScript', 'Node.js', 'Cucumber'],
     imageUrl: placeholderImages.projects.test_automation.src,
-    githubUrl: 'https://github.com/kchavez05/portfolio-site-testing.git',
-    aiHint: 'testing framework logo'
+    githubUrl: 'https://github.com/topnotchqa-kyler/portfolio-pilot/tree/main/tests/wdio',
+    aiHint: 'testing framework logo',
+    testSuiteSlug: 'wdio',
   },
   {
     id: 3,
@@ -28,18 +34,29 @@ export const projectsData: Project[] = [
     description: 'A comprehensive test automation suite using Playwright that covers the whole of the website - e-commerce, blog, form, and login authentication.',
     techStack: ['Playwright', 'TypeScript', 'Node.js'],
     imageUrl: placeholderImages.projects.playwright.src,
-    githubUrl: '#',
-    aiHint: 'playwright logo'
+    aiHint: 'playwright logo',
+    githubUrl: 'https://github.com/topnotchqa-kyler/portfolio-pilot/tree/main/tests/playwright',
+    testSuiteSlug: 'playwright',
   },
   {
     id: 5,
     title: 'Cypress',
     description: 'A comprehensive test automation suite using Cypress that covers the whole of the website - e-commerce, blog, form, and login authentication.',
-    techStack: ['Cypress', 'JavaScript', 'Node.js'],
+    techStack: ['Cypress', 'TypeScript', 'Node.js'],
     imageUrl: placeholderImages.projects.cypress.src,
-    githubUrl: '#',
-    aiHint: 'cypress logo'
-  }
+    aiHint: 'cypress logo',
+    githubUrl: 'https://github.com/topnotchqa-kyler/portfolio-pilot/tree/main/tests/cypress',
+    testSuiteSlug: 'cypress',
+  },
+  {
+    id: 6,
+    title: 'Manual Test Cases',
+    description: 'A collection of 42 manual test cases covering all functional areas of the site — navigation, store, checkout, authentication, contact form, and blog. Written to mirror the automated suite coverage with granular step-by-step instructions and expected results.',
+    techStack: ['Manual Testing', 'Test Planning', 'Test Documentation'],
+    imageUrl: placeholderImages.projects.manual_tests.src,
+    aiHint: 'checklist clipboard',
+    manualTestsSlug: 'manual',
+  },
 ];
 
 export type Product = {
@@ -57,7 +74,7 @@ export const productsData: Product[] = [
     name: 'Quantum Widget',
     description: 'A revolutionary widget that operates at the quantum level. Features include superposition and entanglement for unparalleled performance.',
     price: 99.99,
-    imageUrl: placeholderImages.store.prod_001.src,
+    imageUrl: '/assets/quantum_widget.png',
     aiHint: 'glowing cube'
   },
   {
@@ -65,7 +82,7 @@ export const productsData: Product[] = [
     name: 'Hyper-Threaded Mouse',
     description: 'Experience zero latency with our hyper-threaded computer mouse. Perfect for gaming and professional design work.',
     price: 75.50,
-    imageUrl: placeholderImages.store.prod_002.src,
+    imageUrl: '/assets/hyperthreaded_mouse.png',
     aiHint: 'gaming mouse'
   },
   {
@@ -73,7 +90,7 @@ export const productsData: Product[] = [
     name: 'Cybernetic Keyboard',
     description: 'A mechanical keyboard with a direct neural interface (adapter sold separately). Typing has never been more intuitive.',
     price: 249.99,
-    imageUrl: placeholderImages.store.prod_003.src,
+    imageUrl: '/assets/cybernetic_keyboard.png',
     aiHint: 'mechanical keyboard'
   },
   {
@@ -81,7 +98,7 @@ export const productsData: Product[] = [
     name: 'AI-Powered Coffee Mug',
     description: 'This smart mug keeps your coffee at the perfect temperature and provides daily affirmations powered by a tiny AI.',
     price: 49.99,
-    imageUrl: placeholderImages.store.prod_004.src,
+    imageUrl: '/assets/ai_coffee_mug.png',
     aiHint: 'smart mug'
   },
   {
@@ -89,7 +106,7 @@ export const productsData: Product[] = [
     name: 'Holographic Desk Plant',
     description: 'A beautiful, maintenance-free holographic plant for your desk. Choose from over 100 species.',
     price: 39.99,
-    imageUrl: placeholderImages.store.prod_005.src,
+    imageUrl: '/assets/holographic_desk_plant.png',
     aiHint: 'holographic plant'
   },
   {
@@ -97,15 +114,8 @@ export const productsData: Product[] = [
     name: 'Anti-Gravity Pen',
     description: 'Write upside down, underwater, or in zero gravity. This pen defies physics for the ultimate writing experience.',
     price: 29.99,
-    imageUrl: placeholderImages.store.prod_006.src,
+    imageUrl: '/assets/antigravity_pen.png',
     aiHint: 'floating pen'
   },
 ];
 
-export type BlogPost = {
-  slug: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  content: string;
-};

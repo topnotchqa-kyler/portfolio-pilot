@@ -64,6 +64,12 @@
       "width": 800,
       "height": 300,
       "alt": "Cypress logo"
+    },
+    "manual_tests": {
+      "src": "/assets/manual-tests.svg",
+      "width": 400,
+      "height": 400,
+      "alt": "Manual test cases checklist"
     }
   }
 }

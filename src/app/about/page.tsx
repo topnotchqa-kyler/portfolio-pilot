@@ -1,10 +1,7 @@
 
 import Image from 'next/image';
-import placeholderImages from '@/app/lib/placeholder-images.json';
 
 export default function AboutPage() {
-  const { portrait } = placeholderImages.about;
-
   return (
     <div className="container mx-auto py-16 px-4" data-testid="about-page">
       <section id="story" aria-labelledby="story-heading">
@@ -12,11 +9,10 @@ export default function AboutPage() {
           <div className="md:col-span-1 flex justify-center">
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src={portrait.src}
-                alt={portrait.alt}
+                src="/assets/kyler-chavez.jpg"
+                alt="Kyler Chavez"
                 fill
                 className="object-cover"
-                data-ai-hint="personal portrait"
                 data-testid="about-portrait"
               />
             </div>

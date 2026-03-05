@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Github } from 'lucide-react';
+import { Github, Terminal, ClipboardList } from 'lucide-react';
 import type { Project } from '@/lib/data';
 
 interface ProjectCardProps {
@@ -13,7 +13,8 @@ interface ProjectCardProps {
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const isLogo = project.title.includes('WebdriverIO') || project.title.includes('Playwright') || project.title.includes('Cypress');
+  // Use object-contain for logos/icons (test suite projects and the manual test collection)
+  const isLogo = !!(project.testSuiteSlug || project.manualTestsSlug);
 
   return (
     <Card className="flex flex-col overflow-hidden h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1" data-testid={`project-card-${project.id}`}>
@@ -27,7 +28,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
           />
       </div>
       <CardHeader>
-        <CardTitle className="font-headline">{project.title}</CardTitle>
+        <div className="flex items-center justify-between gap-2">
+          <CardTitle className="font-headline">{project.title}</CardTitle>
+          {project.inProgress && (
+            <Badge variant="outline" className="shrink-0 text-muted-foreground">
+              Coming Soon
+            </Badge>
+          )}
+        </div>
         <CardDescription>{project.description}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
@@ -37,18 +45,32 @@ export function ProjectCard({ project }: ProjectCardProps) {
           ))}
         </div>
       </CardContent>
-      {(project.liveUrl || project.githubUrl) && (
+      {(project.liveUrl || project.githubUrl || project.testSuiteSlug || project.manualTestsSlug) && (
         <CardFooter className="pt-4">
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3">
             {project.githubUrl && (
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" size="sm">
                 <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer" data-testid={`project-github-link-${project.id}`}>
-                  <Github /> GitHub
+                  <Github className="w-4 h-4" /> GitHub
+                </Link>
+              </Button>
+            )}
+            {project.testSuiteSlug && (
+              <Button asChild size="sm">
+                <Link href={`/projects/${project.id}`} data-testid={`project-demo-link-${project.id}`}>
+                  <Terminal className="w-4 h-4" /> View Demo
+                </Link>
+              </Button>
+            )}
+            {project.manualTestsSlug && (
+              <Button asChild size="sm" variant="outline">
+                <Link href={`/projects/${project.id}`} data-testid={`project-manual-link-${project.id}`}>
+                  <ClipboardList className="w-4 h-4" /> View Test Cases
                 </Link>
               </Button>
             )}
             {project.liveUrl && (
-              <Button asChild>
+              <Button asChild size="sm">
                 <Link href={project.liveUrl} data-testid={`project-live-link-${project.id}`}>
                   Live Demo
                 </Link>
