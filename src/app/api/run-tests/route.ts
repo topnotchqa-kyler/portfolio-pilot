@@ -39,7 +39,10 @@ async function resolveChromiumPath(): Promise<{ path?: string; error?: string }>
   if (!process.env.VERCEL) return {};
   try {
     const { default: chromium } = await import('@sparticuz/chromium');
-    const execPath = await chromium.executablePath('/tmp/chromium');
+    // Pass /tmp (which always exists) as the extraction root.
+    // @sparticuz/chromium requires the input directory to already exist;
+    // it extracts the binary into {input}/chromium and returns that path.
+    const execPath = await chromium.executablePath('/tmp');
     return { path: execPath || undefined };
   } catch (err) {
     return { error: err instanceof Error ? err.message : String(err) };
