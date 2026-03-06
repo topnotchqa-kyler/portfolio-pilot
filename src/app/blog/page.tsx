@@ -7,10 +7,11 @@ import { ArrowRight, ArrowLeft } from 'lucide-react';
 
 const POSTS_PER_PAGE = 4;
 
-export default function BlogPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function BlogPage({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
+  const { page } = await searchParams;
   const allPosts = getSortedPostsData();
-  
-  const currentPage = Number(searchParams?.page) || 1;
+
+  const currentPage = Number(page) || 1;
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
 
   const paginatedPosts = allPosts.slice(
