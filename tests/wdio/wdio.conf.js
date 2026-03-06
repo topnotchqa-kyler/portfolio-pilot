@@ -14,7 +14,7 @@ export const config = {
     },
   ],
   logLevel: 'error',
-  baseUrl: 'http://localhost:9002',
+  baseUrl: process.env.BASE_URL || 'http://localhost:9002',
   waitforTimeout: 10000,
   connectionRetryTimeout: 120000,
   connectionRetryCount: 3,

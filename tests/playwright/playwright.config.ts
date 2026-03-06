@@ -7,7 +7,7 @@ export default defineConfig({
   workers: 1,
   reporter: 'list',
   use: {
-    baseURL: 'http://localhost:9002',
+    baseURL: process.env.BASE_URL || 'http://localhost:9002',
     headless: true,
     screenshot: 'only-on-failure',
     actionTimeout: 10000,

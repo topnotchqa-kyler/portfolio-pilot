@@ -2,6 +2,9 @@ import { spawn } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
+// Allow up to 5 minutes for test runs on Vercel (requires Pro plan or higher)
+export const maxDuration = 300;
+
 // Prevent concurrent test runs (works in single-server / dev environments)
 let isRunning = false;
 
