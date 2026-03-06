@@ -27,6 +27,19 @@ function getSuiteCommand(suite: Suite): { cmd: string; args: string[] } | null {
   }
 }
 
+// On Vercel, extract @sparticuz/chromium to /tmp and return the executable path.
+// The path is then forwarded to the playwright test process via CHROMIUM_PATH so
+// playwright.config.ts can use it as the browser executable.
+async function resolveChromiumPath(): Promise<string | undefined> {
+  if (!process.env.VERCEL) return undefined;
+  try {
+    const { default: chromium } = await import('@sparticuz/chromium');
+    return await chromium.executablePath('/tmp/chromium');
+  } catch {
+    return undefined;
+  }
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const suite = searchParams.get('suite') as Suite | null;
@@ -60,6 +73,21 @@ export async function GET(request: Request) {
     return Response.json({ error: 'Invalid suite' }, { status: 400 });
   }
 
+  // Build the spawn environment. For Playwright on Vercel, extract Chromium first
+  // so the test process can find the browser via CHROMIUM_PATH.
+  const spawnEnv: NodeJS.ProcessEnv = {
+    ...process.env,
+    // Force plain output — no colours that survive ANSI stripping as garbage
+    FORCE_COLOR: '0',
+    NO_COLOR: '1',
+    CI: 'true',
+  };
+
+  if (suite === 'playwright') {
+    const chromiumPath = await resolveChromiumPath();
+    if (chromiumPath) spawnEnv.CHROMIUM_PATH = chromiumPath;
+  }
+
   isRunning = true;
 
   const encoder = new TextEncoder();
@@ -79,13 +107,7 @@ export async function GET(request: Request) {
     start(controller) {
       const proc = spawn(suiteCmd.cmd, suiteCmd.args, {
         cwd: suiteDir,
-        env: {
-          ...process.env,
-          // Force plain output — no colours that survive ANSI stripping as garbage
-          FORCE_COLOR: '0',
-          NO_COLOR: '1',
-          CI: 'true',
-        },
+        env: spawnEnv,
         shell: false,
       });
 
