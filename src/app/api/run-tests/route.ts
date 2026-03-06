@@ -31,17 +31,37 @@ function getSuiteCommand(suite: Suite): { cmd: string; args: string[] } | null {
 // The path is then forwarded to the playwright test process via CHROMIUM_PATH so
 // playwright.config.ts can use it as the browser executable.
 //
+// How executablePath(dir) works:
+//   1. Looks for  {dir}/chromium.br  (the Brotli-compressed binary source)
+//   2. Extracts it to  {dir}/chromium  (the runnable executable)
+//   3. Returns  {dir}/chromium
+//
+// The .br file ships inside the npm package at bin/chromium.br, but /var/task
+// (where node_modules lives on Vercel) is read-only — extraction must happen
+// in /tmp.  We therefore copy the .br file into /tmp first, then extract.
+//
 // NOTE: @sparticuz/chromium must be listed in next.config.ts serverExternalPackages
-// so Next.js does NOT bundle it.  When bundled, __dirname inside the package points
-// to the bundle directory rather than node_modules, causing bin/chromium.br to be
-// unresolvable and this function to silently return undefined.
+// so Next.js does NOT bundle it.  When bundled, __dirname inside the package
+// points to the bundle directory, not node_modules, breaking binary resolution.
 async function resolveChromiumPath(): Promise<{ path?: string; error?: string }> {
   if (!process.env.VERCEL) return {};
   try {
     const { default: chromium } = await import('@sparticuz/chromium');
-    // Pass /tmp (which always exists) as the extraction root.
-    // @sparticuz/chromium requires the input directory to already exist;
-    // it extracts the binary into {input}/chromium and returns that path.
+
+    // Copy chromium.br from the (read-only) package directory to writable /tmp
+    // so executablePath can extract it there.  Skip if already present from a
+    // prior warm-Lambda invocation.
+    const tmpBr = '/tmp/chromium.br';
+    if (!fs.existsSync(tmpBr)) {
+      const pkgBr = path.join(
+        process.cwd(),
+        'node_modules', '@sparticuz', 'chromium', 'bin', 'chromium.br'
+      );
+      fs.copyFileSync(pkgBr, tmpBr);
+    }
+
+    // executablePath('/tmp') finds /tmp/chromium.br, extracts to /tmp/chromium,
+    // and returns /tmp/chromium as the executable path.
     const execPath = await chromium.executablePath('/tmp');
     return { path: execPath || undefined };
   } catch (err) {
