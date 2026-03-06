@@ -109,8 +109,9 @@ export async function GET(request: Request) {
   // so the test process can find the browser via CHROMIUM_PATH.
   const spawnEnv: NodeJS.ProcessEnv = {
     ...process.env,
-    // Force plain output — no colours that survive ANSI stripping as garbage
-    FORCE_COLOR: '0',
+    // Disable colour output so ANSI codes don't leak into the browser panel.
+    // NO_COLOR=1 follows the no-color.org spec; omitting FORCE_COLOR avoids
+    // the "NO_COLOR ignored due to FORCE_COLOR" Node.js warning.
     NO_COLOR: '1',
     CI: 'true',
   };
