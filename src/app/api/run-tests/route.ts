@@ -30,13 +30,19 @@ function getSuiteCommand(suite: Suite): { cmd: string; args: string[] } | null {
 // On Vercel, extract @sparticuz/chromium to /tmp and return the executable path.
 // The path is then forwarded to the playwright test process via CHROMIUM_PATH so
 // playwright.config.ts can use it as the browser executable.
-async function resolveChromiumPath(): Promise<string | undefined> {
-  if (!process.env.VERCEL) return undefined;
+//
+// NOTE: @sparticuz/chromium must be listed in next.config.ts serverExternalPackages
+// so Next.js does NOT bundle it.  When bundled, __dirname inside the package points
+// to the bundle directory rather than node_modules, causing bin/chromium.br to be
+// unresolvable and this function to silently return undefined.
+async function resolveChromiumPath(): Promise<{ path?: string; error?: string }> {
+  if (!process.env.VERCEL) return {};
   try {
     const { default: chromium } = await import('@sparticuz/chromium');
-    return await chromium.executablePath('/tmp/chromium');
-  } catch {
-    return undefined;
+    const execPath = await chromium.executablePath('/tmp/chromium');
+    return { path: execPath || undefined };
+  } catch (err) {
+    return { error: err instanceof Error ? err.message : String(err) };
   }
 }
 
@@ -83,9 +89,21 @@ export async function GET(request: Request) {
     CI: 'true',
   };
 
+  // For Playwright on Vercel, resolve the @sparticuz/chromium binary path before
+  // spawning so we can forward it via CHROMIUM_PATH and report any resolution
+  // errors directly in the SSE stream.
+  let chromiumDiagnostic: { line: string; isError: boolean } | undefined;
   if (suite === 'playwright') {
-    const chromiumPath = await resolveChromiumPath();
-    if (chromiumPath) spawnEnv.CHROMIUM_PATH = chromiumPath;
+    const { path: chromiumPath, error: chromiumError } = await resolveChromiumPath();
+    if (chromiumPath) {
+      spawnEnv.CHROMIUM_PATH = chromiumPath;
+      chromiumDiagnostic = { line: `[Chromium] Resolved @sparticuz/chromium → ${chromiumPath}`, isError: false };
+    } else if (process.env.VERCEL) {
+      const msg = chromiumError
+        ? `[Chromium] @sparticuz/chromium resolution failed: ${chromiumError}`
+        : '[Chromium] @sparticuz/chromium returned an empty path — tests will fail.';
+      chromiumDiagnostic = { line: msg, isError: true };
+    }
   }
 
   isRunning = true;
@@ -105,6 +123,12 @@ export async function GET(request: Request) {
 
   const stream = new ReadableStream({
     start(controller) {
+      // Emit chromium resolution status as the first SSE message so it's
+      // always visible at the top of the test output on Vercel.
+      if (chromiumDiagnostic) {
+        send(controller, chromiumDiagnostic);
+      }
+
       const proc = spawn(suiteCmd.cmd, suiteCmd.args, {
         cwd: suiteDir,
         env: spawnEnv,
