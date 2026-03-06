@@ -48,16 +48,19 @@ async function resolveChromiumPath(): Promise<{ path?: string; error?: string }>
   try {
     const { default: chromium } = await import('@sparticuz/chromium');
 
-    // Copy chromium.br from the (read-only) package directory to writable /tmp
-    // so executablePath can extract it there.  Skip if already present from a
-    // prior warm-Lambda invocation.
-    const tmpBr = '/tmp/chromium.br';
-    if (!fs.existsSync(tmpBr)) {
-      const pkgBr = path.join(
-        process.cwd(),
-        'node_modules', '@sparticuz', 'chromium', 'bin', 'chromium.br'
-      );
-      fs.copyFileSync(pkgBr, tmpBr);
+    // Copy all files from the package's bin/ directory to writable /tmp.
+    // executablePath(dir) looks for chromium.br, fonts.tar.br, and potentially
+    // other assets inside {dir}, but the package ships them in node_modules which
+    // is read-only on Vercel.  Copy any that aren't already there (warm Lambda).
+    const pkgBinDir = path.join(
+      process.cwd(),
+      'node_modules', '@sparticuz', 'chromium', 'bin'
+    );
+    for (const file of fs.readdirSync(pkgBinDir)) {
+      const dest = path.join('/tmp', file);
+      if (!fs.existsSync(dest)) {
+        fs.copyFileSync(path.join(pkgBinDir, file), dest);
+      }
     }
 
     // executablePath('/tmp') finds /tmp/chromium.br, extracts to /tmp/chromium,
