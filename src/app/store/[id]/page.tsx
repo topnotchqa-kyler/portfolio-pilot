@@ -1,5 +1,6 @@
 'use client';
 
+import { use } from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { productsData } from '@/lib/data';
@@ -10,10 +11,11 @@ import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { useToast } from '@/hooks/use-toast';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { addToCart } = useCart();
   const { toast } = useToast();
-  const product = productsData.find(p => p.id === params.id);
+  const { id } = use(params);
+  const product = productsData.find(p => p.id === id);
 
   if (!product) {
     notFound();
