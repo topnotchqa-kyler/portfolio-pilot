@@ -2,21 +2,19 @@
 import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // Tell Vercel's bundler to include test suite node_modules in the
-    // run-tests serverless function, since spawn() calls aren't statically traceable.
-    outputFileTracingIncludes: {
-      '/api/run-tests': [
-        './tests/playwright/node_modules/**/*',
-        './tests/cypress/node_modules/**/*',
-        './tests/wdio/node_modules/**/*',
-        './tests/playwright/tests/**/*',
-        './tests/cypress/cypress/**/*',
-        './tests/wdio/features/**/*',
-        './tests/wdio/step-definitions/**/*',
-        './tests/wdio/dist/**/*',
-      ],
-    },
+  // Tell Vercel's bundler to include test suite node_modules in the
+  // run-tests serverless function, since spawn() calls aren't statically traceable.
+  outputFileTracingIncludes: {
+    '/api/run-tests': [
+      './tests/playwright/node_modules/**/*',
+      './tests/cypress/node_modules/**/*',
+      './tests/wdio/node_modules/**/*',
+      './tests/playwright/tests/**/*',
+      './tests/cypress/cypress/**/*',
+      './tests/wdio/features/**/*',
+      './tests/wdio/step-definitions/**/*',
+      './tests/wdio/dist/**/*',
+    ],
   },
   images: {
     remotePatterns: [
