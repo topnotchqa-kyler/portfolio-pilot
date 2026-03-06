@@ -7,8 +7,9 @@ export async function generateStaticParams() {
   return paths.map(p => p.params);
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getPostData(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostData(slug);
 
   if (!post) {
     notFound();
