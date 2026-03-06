@@ -1,30 +1,41 @@
-import { spawn } from 'child_process';
-import path from 'path';
-import fs from 'fs';
+import { testResults } from '@/lib/test-results';
 
-// Allow up to 5 minutes for test runs on Vercel (requires Pro plan or higher)
-export const maxDuration = 300;
-
-// Prevent concurrent test runs (works in single-server / dev environments)
-let isRunning = false;
-
-// Strip ANSI escape codes so raw terminal output renders cleanly in the browser
-const ANSI_RE = /\x1B\[[0-9;]*[mGKHFJhlns]|\x1B[()][AB01]/g;
-const stripAnsi = (s: string) => s.replace(ANSI_RE, '');
+// Replay completes well within 60 s even for the longest suite
+export const maxDuration = 60;
 
 type Suite = 'wdio' | 'playwright' | 'cypress';
 
-function getSuiteCommand(suite: Suite): { cmd: string; args: string[] } | null {
-  switch (suite) {
-    case 'playwright':
-      return { cmd: 'npx', args: ['playwright', 'test', '--reporter=list'] };
-    case 'wdio':
-      return { cmd: 'npm', args: ['test'] };
-    case 'cypress':
-      return { cmd: 'npx', args: ['cypress', 'run', '--headless'] };
-    default:
-      return null;
+/**
+ * Return a per-line delay (ms) that makes the replay feel like a live test run:
+ *  - Individual ✓ pass lines   → ~150 ms  (simulate each test taking a moment)
+ *  - WdIO PASSED/RUNNING lines → ~200 ms  (concurrency updates feel deliberate)
+ *  - Cypress "Running: …" lines→ ~120 ms  (spec-file transition)
+ *  - Summary "N passed" lines  →  ~80 ms
+ *  - Blank lines               →  ~20 ms  (keep things moving)
+ *  - Everything else           →  ~40 ms  (headers, separators, chrome prefixes)
+ */
+function getLineDelay(line: string): number {
+  const l = line.toLowerCase();
+
+  // Playwright "  ✓   1 [chromium] › …" and Cypress "    ✓ test name (Xms)"
+  if (/^\s+✓/.test(line)) return 150;
+
+  // WdIO "[0-0] RUNNING in chrome …" / "[0-0] PASSED  in chrome …"
+  if (/\[0-\d\] (passed|running)/i.test(line)) return 200;
+
+  // Cypress "  Running: auth.cy.ts (1 of 6)"
+  if (/^\s+running:/i.test(l) && !l.includes('running in chrome')) return 120;
+
+  // Summary lines: "35 passed", "6 passing", "All specs passed!", "Spec Files: …"
+  if (/\d+ (passed|passing)/.test(l) || l.includes('all specs passed') || l.includes('spec files:')) {
+    return 80;
   }
+
+  // Blank lines
+  if (line.trim() === '') return 20;
+
+  // Default: headers, separator bars, chrome-output prefixes, etc.
+  return 40;
 }
 
 export async function GET(request: Request) {
@@ -32,36 +43,21 @@ export async function GET(request: Request) {
   const suite = searchParams.get('suite') as Suite | null;
 
   if (!suite || !['wdio', 'playwright', 'cypress'].includes(suite)) {
-    return Response.json({ error: 'Invalid suite. Use wdio, playwright, or cypress.' }, { status: 400 });
-  }
-
-  if (isRunning) {
-    return Response.json({ error: 'A test run is already in progress. Please wait.' }, { status: 429 });
-  }
-
-  const suiteDir = path.join(process.cwd(), 'tests', suite);
-
-  // Check the suite directory and node_modules exist
-  if (!fs.existsSync(suiteDir)) {
-    return Response.json({ error: `Test suite directory not found: tests/${suite}` }, { status: 503 });
-  }
-
-  const nodeBin = path.join(suiteDir, 'node_modules', '.bin');
-  const hasNodeModules = fs.existsSync(nodeBin);
-  if (!hasNodeModules) {
     return Response.json(
-      { error: `Dependencies not installed. Run 'npm install' in tests/${suite} first.` },
-      { status: 503 }
+      { error: 'Invalid suite. Use wdio, playwright, or cypress.' },
+      { status: 400 }
     );
   }
 
-  const suiteCmd = getSuiteCommand(suite);
-  if (!suiteCmd) {
-    return Response.json({ error: 'Invalid suite' }, { status: 400 });
+  const result = testResults[suite];
+  if (!result) {
+    return Response.json(
+      { error: `No recorded result for suite: ${suite}` },
+      { status: 404 }
+    );
   }
 
-  isRunning = true;
-
+  const lines = result.output.split('\n');
   const encoder = new TextEncoder();
 
   const send = (
@@ -71,67 +67,39 @@ export async function GET(request: Request) {
     try {
       controller.enqueue(encoder.encode(`data: ${JSON.stringify(payload)}\n\n`));
     } catch {
-      // controller may already be closed
+      // controller may already be closed (client disconnected)
     }
   };
 
   const stream = new ReadableStream({
     start(controller) {
-      const proc = spawn(suiteCmd.cmd, suiteCmd.args, {
-        cwd: suiteDir,
-        env: {
-          ...process.env,
-          // Force plain output — no colours that survive ANSI stripping as garbage
-          FORCE_COLOR: '0',
-          NO_COLOR: '1',
-          CI: 'true',
-        },
-        shell: false,
-      });
+      let idx = 0;
 
-      const handleData = (chunk: Buffer, isError = false) => {
-        const text = stripAnsi(chunk.toString());
-        // Split into individual lines so the client can colour them independently
-        for (const line of text.split('\n')) {
-          send(controller, { line, isError });
+      function sendNextLine() {
+        // Stop immediately if the client disconnected
+        if (request.signal.aborted) {
+          try { controller.close(); } catch { /* already closed */ }
+          return;
         }
-      };
 
-      proc.stdout.on('data', (chunk: Buffer) => handleData(chunk));
-      proc.stderr.on('data', (chunk: Buffer) => handleData(chunk, true));
+        if (idx >= lines.length) {
+          // All lines sent — signal completion with exit code 0
+          send(controller, { done: true, exitCode: 0 });
+          try { controller.close(); } catch { /* already closed */ }
+          return;
+        }
 
-      proc.on('close', (code) => {
-        isRunning = false;
-        send(controller, { done: true, exitCode: code ?? 1 });
-        controller.close();
-      });
+        const line = lines[idx++];
+        send(controller, { line, isError: false });
+        setTimeout(sendNextLine, getLineDelay(line));
+      }
 
-      proc.on('error', (err) => {
-        isRunning = false;
-        send(controller, { line: `[Error starting test runner: ${err.message}]`, isError: true });
-        send(controller, { done: true, exitCode: 1 });
-        controller.close();
-      });
-
-      // Kill the child if the client disconnects
+      // Also close the stream if the request is aborted while we're mid-replay
       request.signal.addEventListener('abort', () => {
-        isRunning = false;
-        proc.kill('SIGTERM');
-        controller.close();
+        try { controller.close(); } catch { /* already closed */ }
       });
 
-      // Safety timeout — kill after 3 minutes
-      const timeout = setTimeout(() => {
-        if (!proc.killed) {
-          isRunning = false;
-          send(controller, { line: '[Timeout: test run exceeded 3 minutes]', isError: true });
-          send(controller, { done: true, exitCode: 1 });
-          proc.kill('SIGTERM');
-          controller.close();
-        }
-      }, 180_000);
-
-      proc.on('close', () => clearTimeout(timeout));
+      sendNextLine();
     },
   });
 
@@ -140,7 +108,7 @@ export async function GET(request: Request) {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache, no-transform',
       Connection: 'keep-alive',
-      'X-Accel-Buffering': 'no', // disable nginx buffering if behind a proxy
+      'X-Accel-Buffering': 'no', // disable nginx buffering if behind a reverse proxy
     },
   });
 }
