@@ -38,7 +38,15 @@ export function getSortedPostsData(): Omit<BlogPost, 'content'>[] {
 }
 
 export async function getPostData(slug: string): Promise<BlogPost> {
+  // Validate slug to prevent path traversal attacks (allow only lowercase letters, digits, hyphens)
+  if (!/^[a-z0-9-]+$/.test(slug)) {
+    throw new Error('Invalid slug');
+  }
   const fullPath = path.join(postsDirectory, `${slug}.md`);
+  // Secondary check: verify the resolved path stays within postsDirectory
+  if (!fullPath.startsWith(postsDirectory + path.sep)) {
+    throw new Error('Invalid slug');
+  }
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const matterResult = matter(fileContents);
 
