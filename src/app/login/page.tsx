@@ -6,7 +6,7 @@ export default function LoginPage() {
     <div className="container mx-auto flex items-center justify-center py-16 px-4 min-h-[calc(100vh-8rem)]">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="font-headline text-2xl">Welcome Back</CardTitle>
+          <CardTitle><h1 className="font-headline text-2xl font-semibold leading-none tracking-tight">Welcome Back</h1></CardTitle>
           <CardDescription>Log in to access your dashboard.</CardDescription>
         </CardHeader>
         <CardContent>

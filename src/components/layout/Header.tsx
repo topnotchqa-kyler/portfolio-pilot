@@ -40,8 +40,8 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           ))}
         </nav>
         <div className="flex items-center gap-2 md:gap-4">
-          <Link href="/checkout" className="relative p-2 hover:bg-accent rounded-full transition-colors" data-testid="header-cart-link">
-            <ShoppingCart className="h-5 w-5" />
+          <Link href="/checkout" aria-label="Shopping cart" className="relative p-2 hover:bg-accent rounded-full transition-colors" data-testid="header-cart-link">
+            <ShoppingCart className="h-5 w-5" aria-hidden="true" />
             {totalItems > 0 && (
               <Badge 
                 className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-[10px]" 

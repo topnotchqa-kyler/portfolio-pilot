@@ -119,7 +119,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={`/projects`} data-testid={`featured-project-link-${project.id}`}>View Project <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                    <Link href={`/projects`} data-testid={`featured-project-link-${project.id}`}>View Project<span className="sr-only">: {project.title}</span> <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" /></Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -148,7 +148,7 @@ export default function Home() {
                 </CardContent>
                 <CardContent>
                   <Button asChild variant="link" className="p-0">
-                    <Link href={`/blog/${post.slug}`} data-testid={`recent-post-link-${post.slug}`}>Read More <ArrowRight className="w-4 h-4 ml-2" /></Link>
+                    <Link href={`/blog/${post.slug}`} data-testid={`recent-post-link-${post.slug}`}>Read More<span className="sr-only">: {post.title}</span> <ArrowRight className="w-4 h-4 ml-2" aria-hidden="true" /></Link>
                   </Button>
                 </CardContent>
               </Card>

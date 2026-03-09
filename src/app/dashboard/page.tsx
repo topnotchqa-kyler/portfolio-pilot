@@ -10,7 +10,7 @@ export default function DashboardPage() {
     <div className="container mx-auto flex items-center justify-center py-16 px-4 min-h-[calc(100vh-8rem)]" data-testid="dashboard-page">
       <Card className="w-full max-w-2xl text-center">
         <CardHeader>
-          <CardTitle className="font-headline text-3xl" data-testid="dashboard-heading">Welcome to your Dashboard</CardTitle>
+          <CardTitle><h1 className="font-headline text-3xl font-semibold leading-none tracking-tight" data-testid="dashboard-heading">Welcome to your Dashboard</h1></CardTitle>
           <CardDescription>This is a protected area for members only.</CardDescription>
         </CardHeader>
         <CardContent>
