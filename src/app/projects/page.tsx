@@ -1,5 +1,15 @@
 
+import type { Metadata } from 'next';
 import { projectsData } from '@/lib/data';
+
+export const metadata: Metadata = {
+  title: 'Projects',
+  description:
+    'Browse QA projects by Kyler Chavez, including automated test suites built with Playwright, Cypress, and WebdriverIO demonstrating manual and automated quality assurance skills.',
+  alternates: {
+    canonical: '/projects',
+  },
+};
 import { ProjectCard } from '@/components/ProjectCard';
 
 export default function ProjectsPage() {

@@ -1,5 +1,15 @@
 
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Articles and insights on software quality assurance, test automation, and QA engineering by Kyler Chavez.',
+  alternates: {
+    canonical: '/blog',
+  },
+};
 import { getSortedPostsData } from '@/lib/blog';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

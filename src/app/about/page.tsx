@@ -1,5 +1,15 @@
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Learn about Kyler Chavez — a QA Engineer based in Mead, Colorado with a unique background in hospitality turned tech, now specializing in manual and automated software testing.',
+  alternates: {
+    canonical: '/about',
+  },
+};
 
 export default function AboutPage() {
   return (
