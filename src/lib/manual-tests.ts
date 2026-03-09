@@ -526,4 +526,71 @@ export const manualTestCases: ManualTestCase[] = [
       { action: 'Verify the "Previous" button is no longer visible.', expected: 'Previous button disappears when back on page 1.' },
     ],
   },
+  {
+    id: 'CHAT-001',
+    category: 'AI Chatbot',
+    subCategory: 'Chatbot Button Visible on Homepage',
+    steps: [
+      { action: 'Navigate to the homepage (/).', expected: 'The homepage loads successfully.' },
+      { action: 'Scan the bottom-right corner of the viewport.', expected: 'A circular chat icon button is visible in the bottom-right corner.' },
+      { action: 'Verify the button is accessible and not obscured by other elements.', expected: 'The chatbot open button is fully visible and clickable.' },
+    ],
+  },
+  {
+    id: 'CHAT-002',
+    category: 'AI Chatbot',
+    subCategory: 'Opening the Chatbot Displays the Chat Interface',
+    steps: [
+      { action: 'Navigate to the homepage (/).', expected: 'The homepage loads successfully.' },
+      { action: 'Click the chatbot icon button in the bottom-right corner.', expected: 'A chat panel slides open from the right side of the screen.' },
+      { action: 'Verify the panel header reads "Chat with Kyra".', expected: 'The title "Chat with Kyra" is displayed at the top of the chat panel.' },
+      { action: 'Verify a text input field is visible at the bottom of the panel.', expected: 'An input field with placeholder text is present.' },
+      { action: 'Verify a send button is present next to the input field.', expected: 'A send/submit button is visible and appears enabled.' },
+    ],
+  },
+  {
+    id: 'CHAT-003',
+    category: 'AI Chatbot',
+    subCategory: 'Input Field and Send Button Are Enabled',
+    steps: [
+      { action: 'Open the chatbot by clicking the chat icon button.', expected: 'The chat panel opens.' },
+      { action: 'Click inside the text input field.', expected: 'The input field receives focus.' },
+      { action: 'Type a short message (e.g., "Hello").', expected: 'The typed text appears in the input field.' },
+      { action: 'Verify the send button is active/enabled.', expected: 'The send button is clickable.' },
+      { action: 'Clear the input field and verify the send button state.', expected: 'The send button may be disabled when the input is empty.' },
+    ],
+  },
+  {
+    id: 'CHAT-004',
+    category: 'AI Chatbot',
+    subCategory: 'Sending a Message Displays It in the Chat History',
+    steps: [
+      { action: 'Open the chatbot by clicking the chat icon button.', expected: 'The chat panel opens.' },
+      { action: 'Type a message in the input field (e.g., "What projects has Kyler worked on?").', expected: 'The message text appears in the input field.' },
+      { action: 'Click the send button or press Enter to submit.', expected: 'The input field clears and the user\'s message appears in the chat history.' },
+      { action: 'Verify the user\'s message bubble is displayed with the correct text.', expected: 'The sent message is visible in the chat with a user avatar or styling.' },
+      { action: 'Verify a loading indicator appears while waiting for a response.', expected: 'A spinner or typing indicator is shown while Kyra processes the message.' },
+    ],
+  },
+  {
+    id: 'CHAT-005',
+    category: 'AI Chatbot',
+    subCategory: 'Kyra Responds to a Portfolio-Related Question',
+    steps: [
+      { action: 'Open the chatbot and type a portfolio-related question (e.g., "What test frameworks does Kyler work with?").', expected: 'The message is submitted and appears in the chat.' },
+      { action: 'Wait for Kyra\'s response to appear (allow up to 30 seconds).', expected: 'A response message from Kyra appears in the chat below the user\'s message.' },
+      { action: 'Verify the response is relevant and mentions testing-related information.', expected: 'Kyra\'s reply references relevant details such as WebdriverIO, Playwright, Cypress, or similar.' },
+      { action: 'Verify the response is displayed with a Kyra avatar or assistant styling.', expected: 'The response is visually distinct from the user\'s message.' },
+    ],
+  },
+  {
+    id: 'CHAT-006',
+    category: 'AI Chatbot',
+    subCategory: 'Kyra Declines Off-Topic Questions',
+    steps: [
+      { action: 'Open the chatbot and type a question unrelated to Kyler or QA (e.g., "What is the capital of France?").', expected: 'The message is submitted and appears in the chat.' },
+      { action: 'Wait for Kyra\'s response to appear (allow up to 30 seconds).', expected: 'A response from Kyra appears in the chat.' },
+      { action: 'Verify that Kyra declines to answer or redirects to Kyler\'s professional information.', expected: 'Kyra\'s reply indicates she can only assist with questions about Kyler or his work, without answering the off-topic question.' },
+    ],
+  },
 ];

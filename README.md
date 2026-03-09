@@ -16,7 +16,8 @@ A full-stack Next.js portfolio demonstrating manual and automated QA skills acro
 | Store & Products   | 6 tests    | 5 tests | 4 scenarios |
 | Checkout Process   | 5 tests    | 7 tests | 4 scenarios |
 | Contact Form       | 5 tests    | 8 tests | 4 scenarios |
-| **Total**          | **35**     | **41**  | **27**      |
+| AI Chatbot (Kyra)  | 5 tests    | 5 tests | 5 scenarios |
+| **Total**          | **40**     | **46**  | **32**      |
 
 ---
 
@@ -64,7 +65,7 @@ npm test
 **Application**
 - **Framework:** Next.js 15 (App Router) + TypeScript
 - **Styling:** Tailwind CSS + ShadCN UI (Radix)
-- **AI Integration:** Genkit + Google Gemini — powers a portfolio chatbot, product image generation, and a test coverage analyzer
+- **AI Integration:** Anthropic Claude (Kyra chatbot) + Genkit + Google Gemini (image generation and test coverage analyzer)
 - **Deployment:** Vercel
 
 ---
@@ -82,13 +83,14 @@ Open [http://localhost:9002](http://localhost:9002).
 
 ### AI Features (optional)
 
-The Genkit chatbot and test analyzer require a Google AI API key. Create a `.env.local` file in the project root:
+The Kyra chatbot uses the Anthropic Claude API. The test coverage analyzer uses Google Gemini. Create a `.env.local` file in the project root:
 
 ```
-GOOGLE_GENAI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here   # Kyra chatbot — get at console.anthropic.com/settings/keys
+GEMINI_API_KEY=your_key_here      # Test analyzer — get at aistudio.google.com/apikey
 ```
 
-All other app features work without it.
+All other app features work without these keys.
 
 ---
 
