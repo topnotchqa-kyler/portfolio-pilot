@@ -8,6 +8,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { checkAuth } from '@/lib/auth';
 import { CartProvider } from '@/context/CartContext';
+import { ThemeProvider } from '@/components/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 
@@ -97,8 +98,9 @@ export default async function RootLayout({
   const isLoggedIn = await checkAuth();
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={cn("font-body antialiased", fontSans.variable, fontSerif.variable)}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <CartProvider>
           <a
             href="#main-content"
@@ -114,6 +116,7 @@ export default async function RootLayout({
           <Chatbot />
           <Toaster />
         </CartProvider>
+        </ThemeProvider>
         <Analytics />
         <SpeedInsights />
       </body>
