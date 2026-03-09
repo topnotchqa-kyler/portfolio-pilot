@@ -16,7 +16,8 @@ A full-stack Next.js portfolio demonstrating manual and automated QA skills acro
 | Store & Products   | 6 tests    | 5 tests | 4 scenarios |
 | Checkout Process   | 5 tests    | 7 tests | 4 scenarios |
 | Contact Form       | 5 tests    | 8 tests | 4 scenarios |
-| **Total**          | **35**     | **41**  | **27**      |
+| AI Chatbot (Kyra)  | 5 tests    | 5 tests | 5 scenarios |
+| **Total**          | **40**     | **46**  | **32**      |
 
 ---
 
@@ -64,7 +65,7 @@ npm test
 **Application**
 - **Framework:** Next.js 15 (App Router) + TypeScript
 - **Styling:** Tailwind CSS + ShadCN UI (Radix)
-- **AI Integration:** Genkit + Google Gemini — powers a portfolio chatbot, product image generation, and a test coverage analyzer
+- **AI Integration:** Anthropic Claude (Kyra chatbot) + Genkit + Google Gemini (image generation and test coverage analyzer)
 - **Deployment:** Vercel
 
 ---
