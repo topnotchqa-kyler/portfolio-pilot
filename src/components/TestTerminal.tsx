@@ -194,18 +194,20 @@ export function TestTerminal({ suite, initialResult }: TestTerminalProps) {
             size="sm"
             onClick={handleReset}
             title="Restore pre-recorded output"
+            aria-label="Restore pre-recorded output"
             className="h-7 w-7 p-0 text-zinc-500 hover:text-zinc-200"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
           </Button>
           <Button
             variant="ghost"
             size="sm"
             onClick={handleCopy}
             title="Copy output"
+            aria-label={copied ? 'Output copied' : 'Copy output'}
             className="h-7 w-7 p-0 text-zinc-500 hover:text-zinc-200"
           >
-            {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+            {copied ? <Check className="w-3.5 h-3.5 text-green-400" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5" aria-hidden="true" />}
           </Button>
           <Button
             size="sm"

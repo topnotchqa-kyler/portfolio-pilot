@@ -108,9 +108,9 @@ export function ManualTestsViewer({ defaultCategory = 'Navigation' }: ManualTest
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-border bg-muted/50">
-                          <th className="w-8 px-3 py-2 text-left text-xs font-medium text-muted-foreground">#</th>
-                          <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground w-[50%]">Action / Step</th>
-                          <th className="px-3 py-2 text-left text-xs font-medium text-muted-foreground">Expected Result</th>
+                          <th scope="col" className="w-8 px-3 py-2 text-left text-xs font-medium text-muted-foreground">#</th>
+                          <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground w-[50%]">Action / Step</th>
+                          <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground">Expected Result</th>
                         </tr>
                       </thead>
                       <tbody>
