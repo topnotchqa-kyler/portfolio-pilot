@@ -1,6 +1,16 @@
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: 'Kyler Chavez | QA Engineer & Software Tester in Colorado',
+  description:
+    'Kyler Chavez is an experienced manual and automated QA Engineer based in Mead, Colorado. Skilled in Playwright, Cypress, WebdriverIO, TestRail, and Zephyr.',
+  alternates: {
+    canonical: '/',
+  },
+};
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowRight, Bot, PenTool, Accessibility, Hand } from 'lucide-react';
@@ -18,8 +28,37 @@ export default function Home() {
     { name: 'Accessibility', icon: <Accessibility className="w-8 h-8 text-primary" />, description: 'Ensuring applications meet WCAG guidelines using tools like Lighthouse.' },
   ];
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:9002';
+
   return (
     <div className="flex flex-col items-center" data-testid="home-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Person',
+            name: 'Kyler Chavez',
+            url: siteUrl,
+            image: `${siteUrl}/assets/kyler-chavez.jpg`,
+            jobTitle: 'QA Engineer',
+            worksFor: {
+              '@type': 'Organization',
+              name: 'Top Notch QA',
+            },
+            address: {
+              '@type': 'PostalAddress',
+              addressLocality: 'Mead',
+              addressRegion: 'CO',
+              addressCountry: 'US',
+            },
+            sameAs: [
+              'https://www.linkedin.com/in/kyler-chavez/',
+              'https://github.com/topnotchqa-kyler',
+            ],
+          }),
+        }}
+      />
       <section id="hero" className="w-full py-20 md:py-32 bg-card" data-testid="hero-section">
         <div className="container mx-auto text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold font-headline tracking-tight text-foreground mb-4">
