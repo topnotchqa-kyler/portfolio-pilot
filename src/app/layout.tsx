@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { checkAuth } from '@/lib/auth';
 import { CartProvider } from '@/context/CartContext';
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const fontSans = Inter({
   subsets: ['latin'],
@@ -46,6 +47,7 @@ export default async function RootLayout({
           <Toaster />
         </CartProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
