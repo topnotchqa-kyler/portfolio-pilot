@@ -57,3 +57,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Party Mode ─────────────────────────────────────────────────────────── */
+@property --party-hue {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 262;
+}
+
+@keyframes party-glow {
+  from { --party-hue: 0; }
+  to   { --party-hue: 360; }
+}
+
+html.party-mode {
+  animation: party-glow 3s linear infinite;
+  --primary: var(--party-hue) 82% 57%;
+  --ring:    var(--party-hue) 82% 57%;
+}

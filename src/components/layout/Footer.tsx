@@ -1,15 +1,19 @@
 
 import { Github, Linkedin } from 'lucide-react';
 import Link from 'next/link';
+import { PartyBug } from '@/components/PartyBug';
 
 export default function Footer() {
   return (
     <footer className="w-full border-t bg-card" data-testid="footer">
       <div className="container mx-auto flex flex-col items-center justify-between gap-4 py-8 px-4 sm:flex-row">
         <div className="text-center sm:text-left">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Kyler's Testing Playground. All rights reserved.
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} Kyler's Testing Playground. All rights reserved.
+            </p>
+            <PartyBug />
+          </div>
           <p className="text-xs text-muted-foreground mt-1">
             Generated with Firebase Studio
           </p>
