@@ -82,13 +82,14 @@ Open [http://localhost:9002](http://localhost:9002).
 
 ### AI Features (optional)
 
-The Genkit chatbot and test analyzer require a Google AI API key. Create a `.env.local` file in the project root:
+The Kyra chatbot uses the Anthropic Claude API. The test coverage analyzer uses Google Gemini. Create a `.env.local` file in the project root:
 
 ```
-GEMINI_API_KEY=your_key_here
+ANTHROPIC_API_KEY=your_key_here   # Kyra chatbot — get at console.anthropic.com/settings/keys
+GEMINI_API_KEY=your_key_here      # Test analyzer — get at aistudio.google.com/apikey
 ```
 
-All other app features work without it.
+All other app features work without these keys.
 
 ---
 
