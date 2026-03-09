@@ -8,6 +8,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { checkAuth } from '@/lib/auth';
 import { CartProvider } from '@/context/CartContext';
+import { Analytics } from '@vercel/analytics/next';
 
 const fontSans = Inter({
   subsets: ['latin'],
@@ -44,6 +45,7 @@ export default async function RootLayout({
           <Chatbot />
           <Toaster />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
