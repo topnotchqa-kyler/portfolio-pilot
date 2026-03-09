@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/s
 import { Menu, Shapes, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const navLinks = [
   { href: '/', label: 'Home', testId: 'nav-home-link' },
@@ -53,6 +54,8 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
             )}
           </Link>
 
+          <ThemeToggle />
+
           <div className="hidden md:block">
             {isLoggedIn ? (
               <Button asChild>
@@ -96,6 +99,10 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
                     </Link>
                   </SheetClose>
                 ))}
+                <div className="flex items-center gap-3">
+                  <span className="text-muted-foreground text-sm font-medium">Theme</span>
+                  <ThemeToggle />
+                </div>
                  {isLoggedIn ? (
                     <SheetClose asChild>
                       <Button asChild onClick={closeMenu}>
