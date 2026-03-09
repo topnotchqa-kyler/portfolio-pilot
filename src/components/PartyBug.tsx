@@ -1,6 +1,35 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import confetti from 'canvas-confetti';
+
+function fireFireworks() {
+  const duration = 2000;
+  const end = Date.now() + duration;
+
+  const colors = ['#ff0000', '#ff7700', '#ffff00', '#00ff00', '#0099ff', '#9900ff', '#ff00ff'];
+
+  (function frame() {
+    confetti({
+      particleCount: 7,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors,
+    });
+    confetti({
+      particleCount: 7,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors,
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  })();
+}
 
 export function PartyBug() {
   const [partyMode, setPartyMode] = useState(false);
@@ -15,10 +44,17 @@ export function PartyBug() {
     return () => html.classList.remove('party-mode');
   }, [partyMode]);
 
+  const handleClick = useCallback(() => {
+    if (!partyMode) {
+      fireFireworks();
+    }
+    setPartyMode((p) => !p);
+  }, [partyMode]);
+
   return (
     <div className="group relative">
       <button
-        onClick={() => setPartyMode((p) => !p)}
+        onClick={handleClick}
         aria-label={partyMode ? 'Disable party mode' : 'Enable party mode'}
         aria-pressed={partyMode}
         data-testid="party-bug"
