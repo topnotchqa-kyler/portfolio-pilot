@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Next.js (dev)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 9002
+    },
+    {
+      "name": "Genkit AI (dev)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "genkit:dev"],
+      "port": 4000
+    }
+  ]
+}

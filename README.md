@@ -85,7 +85,7 @@ Open [http://localhost:9002](http://localhost:9002).
 The Genkit chatbot and test analyzer require a Google AI API key. Create a `.env.local` file in the project root:
 
 ```
-GOOGLE_GENAI_API_KEY=your_key_here
+GEMINI_API_KEY=your_key_here
 ```
 
 All other app features work without it.
