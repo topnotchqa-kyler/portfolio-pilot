@@ -28,3 +28,12 @@ Feature: Kyra AI Chatbot
     And I click the chat send button
     Then the user message should appear in the chat history
     And Kyra's response should appear in the chat history
+
+  Scenario: Kyra declines to answer an off-topic question
+    Given I am on the home page
+    When I click the chatbot open button
+    And I type "What is the capital of France?" into the chat input
+    And I click the chat send button
+    Then the user message should appear in the chat history
+    And Kyra's response should appear in the chat history
+    And Kyra's response should not contain "Paris"

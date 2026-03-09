@@ -41,3 +41,9 @@ Then('the user message should appear in the chat history', async () => {
 Then("Kyra's response should appear in the chat history", async () => {
   await ChatbotPage.secondMessage.waitForDisplayed({ timeout: 30000 });
 });
+
+Then("Kyra's response should not contain {string}", async (text: string) => {
+  await ChatbotPage.secondMessage.waitForDisplayed({ timeout: 30000 });
+  const responseText = await ChatbotPage.secondMessage.getText();
+  expect(responseText).not.toContain(text);
+});

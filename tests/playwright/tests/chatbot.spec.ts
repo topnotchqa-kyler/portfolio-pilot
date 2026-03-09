@@ -38,4 +38,16 @@ test.describe('Chatbot', () => {
     await expect(chatbot.message(0)).toBeVisible();
     await expect(chatbot.message(1)).toBeVisible({ timeout: 30000 });
   });
+
+  test('Kyra declines to answer an off-topic question', async ({ page }) => {
+    test.setTimeout(45000);
+    const chatbot = new ChatbotPage(page);
+    await chatbot.goto();
+    await chatbot.open();
+    await chatbot.input.fill('What is the capital of France?');
+    await chatbot.sendButton.click();
+    await expect(chatbot.message(0)).toBeVisible();
+    await expect(chatbot.message(1)).toBeVisible({ timeout: 30000 });
+    await expect(chatbot.message(1)).not.toContainText('Paris');
+  });
 });

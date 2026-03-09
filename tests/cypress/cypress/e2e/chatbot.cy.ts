@@ -32,4 +32,13 @@ describe('Chatbot', () => {
     chatbotPage.message(0).should('be.visible');
     chatbotPage.message(1).should('be.visible', { timeout: 30000 });
   });
+
+  it('Kyra declines to answer an off-topic question', () => {
+    chatbotPage.open();
+    chatbotPage.input.type('What is the capital of France?');
+    chatbotPage.sendButton.click();
+    chatbotPage.message(0).should('be.visible');
+    chatbotPage.message(1).should('be.visible', { timeout: 30000 });
+    chatbotPage.message(1).should('not.contain', 'Paris');
+  });
 });

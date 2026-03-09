@@ -83,7 +83,16 @@ Execution of 7 workers started at ${new Date('2026-03-05T19:29:12.222Z').toISOSt
 [chrome #0-2]    ✓ Then the user message should appear in the chat history
 [chrome #0-2]    ✓ And Kyra's response should appear in the chat history
 [chrome #0-2]
-[chrome #0-2] 13 passing (18.4s)
+[chrome #0-2] Kyra declines to answer an off-topic question
+[chrome #0-2]    ✓ Given I am on the home page
+[chrome #0-2]    ✓ When I click the chatbot open button
+[chrome #0-2]    ✓ And I type "What is the capital of France?" into the chat input
+[chrome #0-2]    ✓ And I click the chat send button
+[chrome #0-2]    ✓ Then the user message should appear in the chat history
+[chrome #0-2]    ✓ And Kyra's response should appear in the chat history
+[chrome #0-2]    ✓ And Kyra's response should not contain "Paris"
+[chrome #0-2]
+[chrome #0-2] 18 passing (21.2s)
 ------------------------------------------------------------------
 [chrome #0-3] » /features/checkout.feature 17 passing (6.8s)
 [chrome #0-4] » /features/contact.feature  12 passing (4.9s)
@@ -94,7 +103,7 @@ Spec Files:  7 passed, 7 total (100% completed) in 00:01:06`;
 
 const PLAYWRIGHT_OUTPUT = `$ npx playwright test --reporter=list
 
-Running 39 tests using 1 worker
+Running 40 tests using 1 worker
 
   ✓   1 [chromium] › tests/auth.spec.ts › Authentication › login page displays login form (392ms)
   ✓   2 [chromium] › tests/auth.spec.ts › Authentication › debug login navigates to dashboard (422ms)
@@ -135,8 +144,9 @@ Running 39 tests using 1 worker
   ✓  37 [chromium] › tests/chatbot.spec.ts › Chatbot › opening the chatbot shows the chat interface (489ms)
   ✓  38 [chromium] › tests/chatbot.spec.ts › Chatbot › user message appears in chat after submitting (634ms)
   ✓  39 [chromium] › tests/chatbot.spec.ts › Chatbot › Kyra responds to a portfolio question (4.1s)
+  ✓  40 [chromium] › tests/chatbot.spec.ts › Chatbot › Kyra declines to answer an off-topic question (3.1s)
 
-  39 passed (23.5s)`;
+  40 passed (24.6s)`;
 
 const CYPRESS_OUTPUT = `$ npx cypress run --headless
 
@@ -169,7 +179,8 @@ const CYPRESS_OUTPUT = `$ npx cypress run --headless
     ✓ opening the chatbot shows the chat interface (502ms)
     ✓ user message appears in chat after submitting (651ms)
     ✓ Kyra responds to a portfolio question (4284ms)
-  4 passing (6s)
+    ✓ Kyra declines to answer an off-topic question (2277ms)
+  5 passing (7s)
 
   Running: checkout.cy.ts (4 of 7)
 
@@ -220,7 +231,7 @@ const CYPRESS_OUTPUT = `$ npx cypress run --headless
     ✓ product detail page shows go to checkout button after adding to cart (367ms)
   5 passing (2s)
 
-  All specs passed!  45 tests  30 seconds`;
+  All specs passed!  46 tests  31 seconds`;
 
 export const testResults: Record<string, SuiteResult> = {
   wdio: {
